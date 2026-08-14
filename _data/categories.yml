@@ -1,27 +1,7 @@
-- name: Python
-  slug: python
-  icon: "🐍"
-  description: 문법, 표준 라이브러리, 활용
-
-- name: Git
-  slug: git
-  icon: "🌿"
-  description: 버전 관리와 협업
-
-- name: Data
-  slug: data
-  icon: "📊"
-  description: 데이터 처리와 분석
-
 - name: Machine Learning
   slug: machine-learning
   icon: "🤖"
   description: 머신러닝 개념과 구현
-
-- name: LLM
-  slug: llm
-  icon: "🧠"
-  description: 언어 모델과 생성형 AI
 
 - name: Math
   slug: math

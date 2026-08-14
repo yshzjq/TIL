@@ -15,12 +15,8 @@
 
 ```text
 TIL/
-├─ python/
-│  └─ with-open.md
-├─ git/
-├─ data/
 ├─ machine-learning/
-├─ llm/
+│  └─ linear-regression.md
 └─ math/
 ```
 
@@ -28,17 +24,17 @@ TIL/
 
 ```markdown
 ---
-title: Python with 문과 open 이해하기
+title: 선형 회귀의 기본 원리
 date: 2026-08-14
-description: with 문에서 파일이 자동으로 닫히는 원리를 정리했다.
+description: 선형 회귀가 데이터를 학습하는 기본 원리를 정리했다.
 ---
 
-# Python with 문과 open 이해하기
+# 선형 회귀의 기본 원리
 
 본문을 작성합니다.
 ```
 
-지원하는 폴더는 `python`, `git`, `data`, `machine-learning`, `llm`, `math`입니다. 다른 폴더를 추가하려면 `_config.yml`의 `defaults`와 `_data/categories.yml`에도 해당 카테고리를 추가합니다.
+지원하는 폴더는 `machine-learning`, `math`입니다. 다른 폴더를 추가하려면 `_config.yml`의 `defaults`와 `_data/categories.yml`에도 해당 카테고리를 추가합니다.
 
 ## GitHub Pages 배포
 

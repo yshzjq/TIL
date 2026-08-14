@@ -20,34 +20,10 @@ defaults:
     values:
       layout: default
   - scope:
-      path: "python"
-    values:
-      layout: post
-      category: Python
-      til: true
-  - scope:
-      path: "git"
-    values:
-      layout: post
-      category: Git
-      til: true
-  - scope:
-      path: "data"
-    values:
-      layout: post
-      category: Data
-      til: true
-  - scope:
       path: "machine-learning"
     values:
       layout: post
       category: Machine Learning
-      til: true
-  - scope:
-      path: "llm"
-    values:
-      layout: post
-      category: LLM
       til: true
   - scope:
       path: "math"

@@ -24,7 +24,7 @@ description: 새로운 TIL 글을 추가하는 방법을 안내합니다.
     <section>
       <span class="step-number">01</span>
       <h2>주제 폴더 선택</h2>
-      <p><code>python</code>, <code>git</code>, <code>data</code>, <code>machine-learning</code>, <code>llm</code>, <code>math</code> 중 알맞은 폴더를 고릅니다.</p>
+      <p><code>machine-learning</code>, <code>math</code> 중 알맞은 폴더를 고릅니다.</p>
       <p>경로가 그대로 URL의 일부가 되므로 폴더명과 파일명에는 <strong>영문 소문자와 하이픈</strong> 사용을 권장합니다.</p>
     </section>
 
