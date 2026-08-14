@@ -18,6 +18,20 @@
           <span class="brand-text">Today I Learned</span>
         </a>
         <nav class="site-nav" aria-label="주요 메뉴">
+          <div class="header-search" data-search data-index-url="{{ '/search.json' | relative_url }}">
+            <form class="search-form" role="search">
+              <label class="visually-hidden" for="site-search">TIL 검색</label>
+              <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="m21 21-4.35-4.35m2.35-5.15a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z"/>
+              </svg>
+              <input id="site-search" type="search" placeholder="검색" autocomplete="off" aria-controls="search-results" aria-expanded="false">
+              <button class="search-clear" type="button" aria-label="검색어 지우기" hidden>×</button>
+            </form>
+            <div class="search-results" id="search-results" role="listbox" aria-label="검색 결과" hidden>
+              <p class="search-status" aria-live="polite">검색어를 입력해 주세요.</p>
+              <div class="search-result-list"></div>
+            </div>
+          </div>
           <a{% if page.url == '/' %} class="active"{% endif %} href="{{ '/' | relative_url }}">홈</a>
           <a{% if page.url == '/categories/' %} class="active"{% endif %} href="{{ '/categories/' | relative_url }}">카테고리</a>
           <a class="github-link" href="https://github.com/yshzjq/TIL" target="_blank" rel="noopener noreferrer" aria-label="GitHub 저장소 열기">
@@ -38,5 +52,6 @@
       </div>
       <p>© {{ 'now' | date: '%Y' }} TIL · Built with GitHub Pages</p>
     </footer>
+    <script src="{{ '/assets/js/search.js' | relative_url }}" defer></script>
   </body>
 </html>

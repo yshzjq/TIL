@@ -1,0 +1,17 @@
+---
+layout: null
+permalink: /search.json
+---
+{% assign til_pages = site.pages | where: "til", true | sort: "date" | reverse %}
+[
+  {% for item in til_pages %}
+    {
+      "title": {{ item.title | jsonify }},
+      "description": {{ item.description | default: "" | jsonify }},
+      "category": {{ item.category | default: "" | jsonify }},
+      "date": "{{ item.date | date: '%Y.%m.%d' }}",
+      "url": {{ item.url | relative_url | jsonify }},
+      "content": {{ item.content | markdownify | strip_html | strip_newlines | jsonify }}
+    }{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+]
