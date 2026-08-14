@@ -1,6 +1,57 @@
 title: Today I Learned
-description: 공부하면서 배운 내용을 기록하는 TIL
+description: 매일 배우고 이해한 것을 기록하는 개발 학습 노트
+url: "https://yshzjq.github.io"
+baseurl: "/TIL"
 
-theme: jekyll-theme-minimal
-
+lang: ko-KR
+timezone: Asia/Seoul
 markdown: kramdown
+highlighter: rouge
+
+# GitHub Pages가 처리할 필요가 없는 저장소 파일
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+  - scope:
+      path: "python"
+    values:
+      layout: post
+      category: Python
+      til: true
+  - scope:
+      path: "git"
+    values:
+      layout: post
+      category: Git
+      til: true
+  - scope:
+      path: "data"
+    values:
+      layout: post
+      category: Data
+      til: true
+  - scope:
+      path: "machine-learning"
+    values:
+      layout: post
+      category: Machine Learning
+      til: true
+  - scope:
+      path: "llm"
+    values:
+      layout: post
+      category: LLM
+      til: true
+  - scope:
+      path: "math"
+    values:
+      layout: post
+      category: Math
+      til: true

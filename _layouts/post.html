@@ -1,0 +1,26 @@
+---
+layout: default
+---
+
+<article class="article">
+  <header class="article-header">
+    <nav class="breadcrumb" aria-label="현재 위치">
+      <a href="{{ '/' | relative_url }}">홈</a>
+      <span aria-hidden="true">/</span>
+      <a href="{{ '/categories/' | relative_url }}#{{ page.category | slugify }}">{{ page.category }}</a>
+    </nav>
+    <span class="category-label">{{ page.category }}</span>
+    <h1>{{ page.title }}</h1>
+    {% if page.description %}<p class="article-description">{{ page.description }}</p>{% endif %}
+    <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y년 %m월 %d일" }}</time>
+  </header>
+
+  <div class="article-body">
+    {{ content }}
+  </div>
+
+  <footer class="article-footer">
+    <p>이 기록이 도움이 되었나요?</p>
+    <a class="button button-secondary" href="{{ '/categories/' | relative_url }}#{{ page.category | slugify }}">{{ page.category }}의 다른 글 보기</a>
+  </footer>
+</article>
