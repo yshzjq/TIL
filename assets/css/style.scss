@@ -104,8 +104,9 @@ a { color: inherit; text-decoration: none; }
 
 .header-search {
   position: relative;
-  width: 210px;
+  width: 180px;
   margin-right: 4px;
+  flex: 0 0 180px;
 }
 
 .search-form {
@@ -446,7 +447,7 @@ a { color: inherit; text-decoration: none; }
 
 @media (max-width: 800px) {
   .brand-text { display: none; }
-  .header-search { width: 170px; }
+  .header-search { width: 150px; flex-basis: 150px; }
   .hero { padding: 60px 34px 100px; }
   .hero-stat { right: auto; bottom: 31px; left: 34px; }
   .category-grid { grid-template-columns: repeat(2, 1fr); }
@@ -458,7 +459,7 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 560px) {
   .header-inner, .site-main, .site-footer { width: min(calc(100% - 28px), var(--content)); }
   .header-inner { min-height: 64px; }
-  .header-search { width: 112px; margin-right: 0; }
+  .header-search { width: 108px; margin-right: 0; flex-basis: 108px; }
   .search-icon { margin-left: 9px; }
   .search-results { position: fixed; top: 72px; right: 14px; left: 14px; width: auto; }
   .site-nav { gap: 1px; }
