@@ -1,0 +1,6 @@
+title: Today I Learned
+description: 공부하면서 배운 내용을 기록하는 TIL
+
+theme: jekyll-theme-minimal
+
+markdown: kramdown
