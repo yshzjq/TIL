@@ -14,9 +14,14 @@ layout: default
     {% if page.description %}<p class="article-description">{{ page.description }}</p>{% endif %}
     {% assign modified_date = page.updated | default: page.date %}
     <div class="article-byline">
-      <time datetime="{{ page.date | date_to_xmlschema }}">작성 {{ page.date | date: "%Y년 %m월 %d일" }}</time>
-      <span aria-hidden="true">·</span>
-      <time datetime="{{ modified_date | date_to_xmlschema }}">수정 {{ modified_date | date: "%Y년 %m월 %d일" }}</time>
+      <div class="article-date">
+        <strong>작성일</strong>
+        <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y년 %m월 %d일" }}</time>
+      </div>
+      <div class="article-date">
+        <strong>수정일</strong>
+        <time datetime="{{ modified_date | date_to_xmlschema }}">{{ modified_date | date: "%Y년 %m월 %d일" }}</time>
+      </div>
     </div>
   </header>
 
@@ -25,11 +30,10 @@ layout: default
   </div>
 
   <footer class="article-footer">
-    <p>이 기록이 도움이 되었나요?</p>
     <div class="article-footer-actions">
-      <a class="button button-secondary" href="{{ '/categories/' | relative_url }}#{{ page.category | slugify }}">{{ page.category }}의 다른 글 보기</a>
+      <a class="button button-secondary" href="{{ '/categories/' | relative_url }}#{{ page.category | slugify }}">다른 글 보기</a>
       {% assign editor_collection = page.category | slugify %}
-      <a class="article-edit-link" href="{{ '/admin/' | relative_url }}#/collections/{{ editor_collection }}/entries/{{ page.name | remove: '.md' | uri_escape }}" rel="nofollow">이 글 수정</a>
+      <a class="button button-edit" href="{{ '/admin/' | relative_url }}#/collections/{{ editor_collection }}/entries/{{ page.name | remove: '.md' | uri_escape }}" rel="nofollow">수정</a>
     </div>
   </footer>
 </article>
