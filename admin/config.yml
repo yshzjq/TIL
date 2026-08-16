@@ -49,6 +49,10 @@ collections:
         label: 한 줄 설명
         widget: text
         hint: 홈과 검색 결과에 표시되는 짧은 설명입니다.
+      - name: author
+        label: 작성자
+        widget: string
+        default: yshzjq
       - name: body
         label: 본문
         widget: richtext
@@ -87,6 +91,10 @@ collections:
         label: 한 줄 설명
         widget: text
         hint: 홈과 검색 결과에 표시되는 짧은 설명입니다.
+      - name: author
+        label: 작성자
+        widget: string
+        default: yshzjq
       - name: body
         label: 본문
         widget: richtext
@@ -125,6 +133,10 @@ collections:
         label: 한 줄 설명
         widget: text
         hint: 홈과 검색 결과에 표시되는 짧은 설명입니다.
+      - name: author
+        label: 작성자
+        widget: string
+        default: yshzjq
       - name: body
         label: 본문
         widget: richtext

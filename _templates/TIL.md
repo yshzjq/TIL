@@ -2,6 +2,7 @@
 title: 글 제목
 date: YYYY-MM-DD
 description: 이 글에서 배운 내용을 한 문장으로 설명합니다.
+author: yshzjq
 ---
 
 # 글 제목
