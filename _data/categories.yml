@@ -7,3 +7,8 @@
   slug: math
   icon: "📐"
   description: 수학과 통계의 기초
+
+- name: Python
+  slug: python
+  icon: "🐍"
+  description: Python 문법과 활용

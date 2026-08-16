@@ -420,12 +420,24 @@ a { color: inherit; text-decoration: none; }
 .article-body p { margin: 16px 0; }
 .article-body a { color: var(--primary); text-decoration: underline; text-underline-offset: 3px; }
 .article-body li { margin: 6px 0; }
+.article-body img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 30px auto;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, .08);
+}
 .article-body blockquote { margin: 24px 0; padding: 2px 20px; border-left: 4px solid var(--primary); color: var(--muted); background: var(--primary-soft); }
 .article-body code, .guide-content code { padding: .16em .38em; border-radius: 5px; color: #be123c; background: #f1f5f9; font-family: Consolas, Monaco, monospace; font-size: .9em; }
 .article-body pre, .guide-content pre { overflow-x: auto; margin: 24px 0; padding: 22px; border: 1px solid #1e293b; border-radius: 14px; color: #e2e8f0; background: #0f172a; line-height: 1.65; }
 .article-body pre code, .guide-content pre code { padding: 0; color: inherit; background: transparent; }
 .article-footer { padding-top: 36px; border-top: 1px solid var(--line); text-align: center; }
 .article-footer p { color: var(--muted); }
+.article-footer-actions { display: flex; align-items: center; justify-content: center; gap: 16px; }
+.article-edit-link { color: var(--muted); font-size: 13px; font-weight: 700; }
+.article-edit-link:hover { color: var(--primary); }
 
 .guide-layout { display: grid; grid-template-columns: 250px 1fr; padding: 64px 0 100px; gap: 64px; }
 .guide-summary { position: sticky; top: 100px; height: fit-content; padding: 23px; border: 1px solid #c7d2fe; border-radius: 16px; background: var(--primary-soft); }
@@ -444,6 +456,8 @@ a { color: inherit; text-decoration: none; }
 .site-footer { display: flex; margin-top: 100px; padding: 38px 0 50px; align-items: end; justify-content: space-between; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
 .site-footer strong { color: var(--ink); font-size: 15px; }
 .site-footer p { margin: 4px 0 0; }
+.footer-admin-link { text-decoration: underline; text-underline-offset: 3px; }
+.footer-admin-link:hover { color: var(--primary); }
 
 @media (max-width: 800px) {
   .brand-text { display: none; }
@@ -483,6 +497,7 @@ a { color: inherit; text-decoration: none; }
   .breadcrumb { justify-content: start; }
   .article-header h1 { font-size: 36px; }
   .article-body { font-size: 16px; }
+  .article-footer-actions { flex-direction: column; }
   .guide-content section { padding-left: 42px; }
   .site-footer { align-items: start; flex-direction: column; gap: 18px; }
 }

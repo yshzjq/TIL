@@ -31,3 +31,9 @@ defaults:
       layout: post
       category: Math
       til: true
+  - scope:
+      path: "python"
+    values:
+      layout: post
+      category: Python
+      til: true

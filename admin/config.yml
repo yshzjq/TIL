@@ -1,0 +1,139 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms@0.172.4/schema/sveltia-cms.json
+
+backend:
+  name: github
+  repo: yshzjq/TIL
+  branch: main
+  auth_methods: [token]
+  commit_messages:
+    create: '새 글 작성: {{slug}}'
+    update: '글 수정: {{slug}}'
+    delete: '글 삭제: {{slug}}'
+    uploadMedia: '이미지 추가: {{path}}'
+    deleteMedia: '이미지 삭제: {{path}}'
+
+site_url: https://yshzjq.github.io/TIL/
+display_url: https://yshzjq.github.io/TIL/
+
+media_folder: /assets/images/uploads
+public_folder: /TIL/assets/images/uploads
+media_libraries:
+  default:
+    config:
+      max_file_size: 5242880
+      slugify_filename: true
+
+collections:
+  - name: machine-learning
+    label: 머신러닝
+    label_singular: 머신러닝 글
+    description: 머신러닝 개념과 구현에 관한 기록
+    folder: /machine-learning
+    extension: md
+    format: yaml-frontmatter
+    create: true
+    delete: true
+    slug: "{{fields._slug}}"
+    summary: "{{title}} · {{date | date('YYYY.MM.DD')}}"
+    sortable_fields: [title, date]
+    fields:
+      - name: title
+        label: 제목
+        widget: string
+      - name: date
+        label: 작성일
+        widget: datetime
+        type: date
+        default: "{{now}}"
+      - name: description
+        label: 한 줄 설명
+        widget: text
+        hint: 홈과 검색 결과에 표시되는 짧은 설명입니다.
+      - name: body
+        label: 본문
+        widget: richtext
+        modes: [rich_text, raw]
+        default: |-
+          ## 오늘 배운 내용
+
+          내용을 작성합니다.
+
+          ## 정리
+
+          - 핵심 내용을 정리합니다.
+
+  - name: math
+    label: 수학
+    label_singular: 수학 글
+    description: 수학과 통계의 기초에 관한 기록
+    folder: /math
+    extension: md
+    format: yaml-frontmatter
+    create: true
+    delete: true
+    slug: "{{fields._slug}}"
+    summary: "{{title}} · {{date | date('YYYY.MM.DD')}}"
+    sortable_fields: [title, date]
+    fields:
+      - name: title
+        label: 제목
+        widget: string
+      - name: date
+        label: 작성일
+        widget: datetime
+        type: date
+        default: "{{now}}"
+      - name: description
+        label: 한 줄 설명
+        widget: text
+        hint: 홈과 검색 결과에 표시되는 짧은 설명입니다.
+      - name: body
+        label: 본문
+        widget: richtext
+        modes: [rich_text, raw]
+        default: |-
+          ## 오늘 배운 내용
+
+          내용을 작성합니다.
+
+          ## 정리
+
+          - 핵심 내용을 정리합니다.
+
+  - name: python
+    label: Python
+    label_singular: Python 글
+    description: Python 문법과 활용에 관한 기록
+    folder: /python
+    extension: md
+    format: yaml-frontmatter
+    create: true
+    delete: true
+    slug: "{{fields._slug}}"
+    summary: "{{title}} · {{date | date('YYYY.MM.DD')}}"
+    sortable_fields: [title, date]
+    fields:
+      - name: title
+        label: 제목
+        widget: string
+      - name: date
+        label: 작성일
+        widget: datetime
+        type: date
+        default: "{{now}}"
+      - name: description
+        label: 한 줄 설명
+        widget: text
+        hint: 홈과 검색 결과에 표시되는 짧은 설명입니다.
+      - name: body
+        label: 본문
+        widget: richtext
+        modes: [rich_text, raw]
+        default: |-
+          ## 오늘 배운 내용
+
+          내용을 작성합니다.
+
+          ## 정리
+
+          - 핵심 내용을 정리합니다.

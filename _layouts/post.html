@@ -21,6 +21,10 @@ layout: default
 
   <footer class="article-footer">
     <p>이 기록이 도움이 되었나요?</p>
-    <a class="button button-secondary" href="{{ '/categories/' | relative_url }}#{{ page.category | slugify }}">{{ page.category }}의 다른 글 보기</a>
+    <div class="article-footer-actions">
+      <a class="button button-secondary" href="{{ '/categories/' | relative_url }}#{{ page.category | slugify }}">{{ page.category }}의 다른 글 보기</a>
+      {% assign editor_collection = page.category | slugify %}
+      <a class="article-edit-link" href="{{ '/admin/' | relative_url }}#/collections/{{ editor_collection }}/entries/{{ page.name | remove: '.md' | uri_escape }}" rel="nofollow">이 글 수정</a>
+    </div>
   </footer>
 </article>
