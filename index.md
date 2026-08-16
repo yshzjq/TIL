@@ -4,6 +4,8 @@ description: 매일 배운 내용을 차곡차곡 기록하는 개발 학습 노
 ---
 
 {% assign til_pages = site.pages | where: "til", true | sort: "date" | reverse %}
+{% assign current_timestamp = site.time | date: "%s" | plus: 0 %}
+{% assign recent_period_seconds = 259200 %}
 
 <section class="hero">
   <p class="eyebrow">LEARN · RECORD · GROW</p>
@@ -46,26 +48,37 @@ description: 매일 배운 내용을 차곡차곡 기록하는 개발 학습 노
   <div class="section-heading">
     <div>
       <p class="eyebrow">RECENT NOTES</p>
-      <h2 id="recent-title">최근 TIL</h2>
+      <h2 id="recent-title">최근 작성한 TIL</h2>
     </div>
   </div>
 
   {% if til_pages.size > 0 %}
+    {% assign recent_count = 0 %}
     <div class="post-list">
-      {% for page in til_pages limit: 8 %}
-        <article class="post-card">
-          <a href="{{ page.url | relative_url }}" aria-label="{{ page.title }} 읽기">
-            <div class="post-meta">
-              <span class="category-label">{{ page.category }}</span>
-              <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y.%m.%d" }}</time>
-            </div>
-            <h3>{{ page.title }}</h3>
-            <p>{{ page.description | default: page.excerpt | strip_html | truncate: 120 }}</p>
-            <span class="read-more">기록 읽기 <span aria-hidden="true">→</span></span>
-          </a>
-        </article>
+      {% for page in til_pages %}
+        {% assign page_timestamp = page.date | date: "%s" | plus: 0 %}
+        {% assign page_age_seconds = current_timestamp | minus: page_timestamp %}
+        {% if page_age_seconds >= 0 and page_age_seconds < recent_period_seconds and recent_count < 6 %}
+          <article class="post-card">
+            <a href="{{ page.url | relative_url }}" aria-label="{{ page.title }} 읽기">
+              <div class="post-meta">
+                <span class="category-label">{{ page.category }}</span>
+                <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y.%m.%d" }}</time>
+              </div>
+              <h3>{{ page.title }}</h3>
+              <p>{{ page.description | default: page.excerpt | strip_html | truncate: 120 }}</p>
+              <span class="read-more">기록 읽기 <span aria-hidden="true">→</span></span>
+            </a>
+          </article>
+          {% assign recent_count = recent_count | plus: 1 %}
+        {% endif %}
       {% endfor %}
     </div>
+    {% if recent_count == 0 %}
+      <div class="empty-state">
+        <p>최근 3일 동안 작성된 TIL이 없습니다.</p>
+      </div>
+    {% endif %}
   {% else %}
     <div class="empty-state">
       <p>아직 작성된 TIL이 없습니다.</p>
