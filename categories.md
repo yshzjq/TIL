@@ -15,7 +15,6 @@ description: 분야별로 정리한 모든 TIL 기록입니다.
 <div class="category-browser" data-category-browser>
   <aside class="category-sidebar" aria-labelledby="category-filter-title">
     <div class="category-sidebar-heading">
-      <p class="eyebrow">BROWSE</p>
       <h2 id="category-filter-title">카테고리</h2>
     </div>
 
