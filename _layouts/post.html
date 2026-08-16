@@ -31,9 +31,9 @@ layout: default
 
   <footer class="article-footer">
     <div class="article-footer-actions">
-      <a class="button button-secondary" href="{{ '/categories/' | relative_url }}#{{ page.category | slugify }}">다른 글 보기</a>
       {% assign editor_collection = page.category | slugify %}
       <a class="button button-edit" href="{{ '/admin/' | relative_url }}#/collections/{{ editor_collection }}/entries/{{ page.name | remove: '.md' | uri_escape }}" rel="nofollow">수정</a>
+      <a class="button button-secondary" href="{{ '/categories/' | relative_url }}#{{ page.category | slugify }}">다른 글 보기</a>
     </div>
   </footer>
 </article>
