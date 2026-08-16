@@ -52,13 +52,14 @@ description: 분야별로 정리한 모든 TIL 기록입니다.
         <div class="category-board-header" role="row">
           <span role="columnheader">번호</span>
           <span role="columnheader">제목</span>
-          <span role="columnheader">작성자</span>
           <span role="columnheader">작성일</span>
+          <span role="columnheader">수정일</span>
         </div>
 
         <div id="category-posts" class="category-board-body" role="rowgroup">
           {% for post in til_pages %}
             {% assign post_number = til_pages.size | minus: forloop.index0 %}
+            {% assign modified_date = post.updated | default: post.date %}
             <article class="category-board-row" data-category-row data-category="{{ post.category | slugify }}" role="row">
               <span class="category-board-number" data-post-number role="cell">{{ post_number }}</span>
               <div class="category-board-title-cell" role="cell">
@@ -71,8 +72,8 @@ description: 분야별로 정리한 모든 TIL 기록입니다.
                   <span class="category-board-label">{{ post.category }}</span>
                 </a>
               </div>
-              <span class="category-board-author" role="cell">{{ post.author | default: site.author | default: "yshzjq" }}</span>
-              <time class="category-board-date" datetime="{{ post.date | date_to_xmlschema }}" role="cell">{{ post.date | date: "%Y.%m.%d" }}</time>
+              <time class="category-board-created" datetime="{{ post.date | date_to_xmlschema }}" role="cell">{{ post.date | date: "%Y.%m.%d" }}</time>
+              <time class="category-board-updated" datetime="{{ modified_date | date_to_xmlschema }}" role="cell">{{ modified_date | date: "%Y.%m.%d" }}</time>
             </article>
           {% endfor %}
         </div>

@@ -12,10 +12,11 @@ layout: default
     <span class="category-label">{{ page.category }}</span>
     <h1>{{ page.title }}</h1>
     {% if page.description %}<p class="article-description">{{ page.description }}</p>{% endif %}
+    {% assign modified_date = page.updated | default: page.date %}
     <div class="article-byline">
-      <span>{{ page.author | default: site.author | default: "yshzjq" }}</span>
+      <time datetime="{{ page.date | date_to_xmlschema }}">작성 {{ page.date | date: "%Y년 %m월 %d일" }}</time>
       <span aria-hidden="true">·</span>
-      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y년 %m월 %d일" }}</time>
+      <time datetime="{{ modified_date | date_to_xmlschema }}">수정 {{ modified_date | date: "%Y년 %m월 %d일" }}</time>
     </div>
   </header>
 

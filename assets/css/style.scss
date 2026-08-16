@@ -462,10 +462,9 @@ a { color: inherit; text-decoration: none; }
 .category-board-title:hover .category-board-arrow { opacity: 1; transform: translateX(0); }
 .category-board-description { overflow: hidden; margin-top: 3px; color: var(--muted); font-size: 13px; text-overflow: ellipsis; white-space: nowrap; }
 .category-board-label { display: none; width: fit-content; margin-top: 8px; padding: 2px 8px; border-radius: 999px; color: var(--primary); background: var(--primary-soft); font-size: 10px; font-weight: 800; }
-.category-board-author,
-.category-board-date { color: var(--muted); font-size: 12px; }
-.category-board-author { overflow: hidden; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
-.category-board-date { font-variant-numeric: tabular-nums; }
+.category-board-created,
+.category-board-updated { color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+.category-board-updated { color: var(--primary); font-weight: 700; }
 .category-filter-empty { padding: 56px 24px; border: 1px dashed #cbd5e1; border-radius: 18px; color: var(--muted); text-align: center; background: rgba(255, 255, 255, .55); }
 
 .article { max-width: 800px; margin: 0 auto; padding: 68px 0 90px; }
@@ -573,10 +572,10 @@ a { color: inherit; text-decoration: none; }
   .category-board-title strong { font-size: 15px; white-space: normal; }
   .category-board-description { white-space: normal; }
   .category-board-label { display: inline-flex; }
-  .category-board-author,
-  .category-board-date { grid-column: 2; }
-  .category-board-author::before { content: "작성자 "; color: #94a3b8; font-weight: 500; }
-  .category-board-date::before { content: "작성일 "; color: #94a3b8; }
+  .category-board-created,
+  .category-board-updated { grid-column: 2; }
+  .category-board-created::before { content: "작성일 "; color: #94a3b8; }
+  .category-board-updated::before { content: "수정일 "; color: #94a3b8; font-weight: 500; }
   .article { padding-top: 48px; }
   .article-header { text-align: left; }
   .breadcrumb { justify-content: start; }
