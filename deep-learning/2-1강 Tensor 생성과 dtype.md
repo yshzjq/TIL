@@ -1,7 +1,7 @@
 ---
 title: 2-1강 Tensor 생성과 dtype
 date: 2026-08-19
-updated: 2026-08-19
+updated: 2026-08-20
 description: KANT 강의 '2-1강 Tensor 생성과 dtype' 정리
 ---
 
@@ -224,9 +224,32 @@ device: cpu
 | `torch.int64` 또는 `torch.long` | `CrossEntropyLoss`에서 클래스 인덱스로 쓰는 라벨 |
 | `torch.bool` | 조건 마스크 |
 
-예를 들어 이미지 픽셀 값, 임베딩 벡터, 모델의 가중치는 보통 실수입니다.
+예를 들어 이미지 픽셀 값, 임베딩 벡터, 모델의 가중치는 보통 실수다.
 
-반면 `CrossEntropyLoss`로 다중 클래스 분류를 할 때의 정답은 보통 정수 클래스 번호입니다. 이진 분류의 `BCEWithLogitsLoss` target은 예외로, 0/1 값을 가진 실수형 Tensor를 사용합니다.
+반면 `CrossEntropyLoss`로 다중 클래스 분류를 할 때의 정답은 보통 정수 클래스 번호다.<br>
+이진 분류의 `BCEWithLogitsLoss` target은 예외로, 0/1 값을 가진 실수형 Tensor를 사용.
+
+
+### CrossEntropyLoss 예시
+
+예를 들어 이미지를 고양이 / 강아지 / 토끼 중 하나로 분류한다고 해보자.
+
+고양이 = 0
+강아지 = 1
+토끼   = 2
+
+모델이 한 샘플에 대해 이런 값을 출력
+
+logits = [2.1, 0.5, -1.2]
+
+3개 클래스 각각에 대한 점수.
+
+정답이 강아지라면 CrossEntropyLoss에는 정답을 이렇게 준다
+
+target = 1
+
+#
+
 
 ```python
 import torch
@@ -257,3 +280,124 @@ BCEWithLogitsLoss + 0/1 target: torch.float32 등 입력과 같은 실수형
 같은 ‘분류 라벨’이라도 loss가 기대하는 형식을 먼저 확인해야 합니다.
 
 ---
+
+## 6. Tensor 생성 방법
+
+### `torch.tensor`
+
+직접 값을 넣어 Tensor를 만듭니다.
+
+```python
+import torch
+
+# Python 리스트를 Tensor로 변환합니다.
+x = torch.tensor([1, 2, 3])
+
+print(x)
+print(x.dtype)
+```
+
+출력
+
+```
+tensor([1, 2, 3])
+torch.int64
+```
+
+정수만 넣어 만들었기 때문에 기본 dtype이 `int64`입니다. <br>
+모델 입력으로 사용할 실수 Tensor라면 `dtype=torch.float32`를 지정하거나 `.float()`로 변환한다.
+
+### `torch.zeros`
+
+모든 값이 0인 Tensor를 만든다
+
+```python
+# 2행 3열짜리 0 Tensor를 만듭니다.
+zeros = torch.zeros(2, 3)
+
+print(zeros)
+print(zeros.shape)
+```
+
+### `torch.ones`
+
+모든 값이 1인 Tensor를 만든다
+
+```python
+# 2행 3열짜리 1 Tensor를 만듭니다.
+ones = torch.ones(2, 3)
+
+print(ones)
+print(ones.shape)
+```
+
+### `torch.randn`
+
+무작위 실수 Tensor를 만든다
+
+```python
+# 4개의 샘플, 각 샘플마다 5개의 feature가 있다고 가정합니다.
+batch = torch.randn(4, 5)
+
+print(batch)
+print(batch.shape)
+```
+
+`torch.randn(4, 5)`는 4행 5열짜리 표라고 볼 수도 있고, 딥러닝 관점에서는 샘플 4개, 각 샘플의 feature 5개라고 볼 수도 있다.
+
+## 7. Tensor 정보를 한 번에 확인하는 함수 만들기
+
+실전에서는 Tensor가 많아집니다.
+
+그래서 매번 `shape`, `dtype`, `device`를 따로 출력하기보다, 디버깅용 함수를 만들어두면 좋습니다.
+
+```python
+import torch
+
+def describe_tensor(name, tensor):
+    """
+    Tensor의 핵심 정보를 한 번에 출력하는 함수입니다.
+    name: 출력할 때 사용할 Tensor 이름입니다.
+    tensor: 정보를 확인할 PyTorch Tensor입니다.
+    """
+    print(f"[{name}]")
+    print(f"  shape : {tensor.shape}")   # Tensor의 모양
+    print(f"  ndim  : {tensor.ndim}")    # Tensor의 차원 수
+    print(f"  dtype : {tensor.dtype}")   # Tensor 내부 값의 자료형
+    print(f"  device: {tensor.device}")  # Tensor가 저장된 장치
+    print()
+
+# 예시 Tensor를 만듭니다.
+x = torch.randn(4, 5)
+y = torch.tensor([0, 1, 2, 1], dtype=torch.long)
+
+# Tensor 정보를 확인합니다.
+describe_tensor("x", x)
+describe_tensor("y", y)
+```
+
+예상 출력
+
+```
+[x]
+  shape : torch.Size([4, 5])
+  ndim  : 2
+  dtype : torch.float32
+  device: cpu
+
+[y]
+  shape : torch.Size([4])
+  ndim  : 1
+  dtype : torch.int64
+  device: cpu
+```
+
+⭐ **중요**
+
+앞으로 오류가 나면 가장 먼저 다음 세 줄을 출력하세요.
+
+```
+print(x.shape)
+print(x.dtype)
+print(x.device)
+```
