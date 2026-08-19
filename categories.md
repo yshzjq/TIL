@@ -81,11 +81,11 @@ description: 분야별로 정리한 모든 TIL 기록입니다.
               <div class="category-board-title-cell" role="cell">
                 <a class="category-board-title" href="{{ post.url | relative_url }}">
                   <span class="category-board-title-line">
+                    <span class="category-board-label">{{ post.category }}</span>
                     <strong>{{ post.title }}</strong>
                     <span class="category-board-arrow" aria-hidden="true">→</span>
                   </span>
                   <span class="category-board-description">{{ post.description }}</span>
-                  <span class="category-board-label">{{ post.category }}</span>
                 </a>
               </div>
               <time class="category-board-created" datetime="{{ post.date | date_to_xmlschema }}" role="cell">

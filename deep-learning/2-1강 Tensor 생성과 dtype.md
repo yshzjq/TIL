@@ -61,7 +61,98 @@ torch.Size([])
 값이 하나뿐이라서 행도 열도 없는 **0차원 Tensor**라는 뜻이다.
 
 
+### 1차원 Tensor: Vector
+
+숫자가 한 줄로 나열된 구조.
+
+```python
+# 숫자 3개가 한 줄로 들어 있는 Tensor입니다.
+# 벡터(vector)라고 생각하면 됩니다.
+vector = torch.tensor([1, 2, 3])
+
+print(vector)
+print(vector.shape)
+print(vector.ndim)
+```
+
+예상 출력
+
+```
+tensor([1, 2, 3])
+torch.Size([3])
+1
+```
+
+`torch.Size([3])`은 값이 3개 있는 1차원 Tensor라는 뜻.
 
 
+### 2차원 Tensor: Matrix
+
+행과 열이 있는 표 형태
+
+```python
+# 2행 3열짜리 Tensor입니다.
+# 엑셀 표처럼 생각하면 이해하기 쉽습니다.
+matrix = torch.tensor([
+    [1, 2, 3],
+    [4, 5, 6]
+])
+
+print(matrix)
+print(matrix.shape)
+print(matrix.ndim)
+```
+
+예상 출력
+
+```
+tensor([[1, 2, 3],
+        [4, 5, 6]])
+torch.Size([2, 3])
+2
+```
+
+`torch.Size([2, 3])`은 다음처럼 읽습니다.
+
+```
+2개의 행이 있고,
+각 행마다 3개의 값이 있습니다.
+```
+
+즉, 2행 3열입니다.
 
 
+### 3차원 Tensor: 여러 개의 행렬 묶음
+
+3차원 Tensor는 2차원 표가 여러 장 쌓인 구조
+
+```python
+# 2개의 행렬이 들어 있는 3차원 Tensor입니다.
+tensor_3d = torch.tensor([
+    [
+        [1, 2, 3],
+        [4, 5, 6]
+    ],
+    [
+        [7, 8, 9],
+        [10, 11, 12]
+    ]
+])
+
+print(tensor_3d)
+print(tensor_3d.shape)
+print(tensor_3d.ndim)
+```
+
+예상 출력
+
+```
+torch.Size([2, 2, 3])
+3
+```
+
+`torch.Size([2, 2, 3])`은 다음처럼 읽습니다.
+
+```
+2개의 묶음이 있고, 각 묶음 안에는 2개의 행이 있고, 각 행에는 3개의 값이 있습니다.
+```

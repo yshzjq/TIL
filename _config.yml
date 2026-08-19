@@ -26,6 +26,12 @@ defaults:
       category: Machine Learning
       til: true
   - scope:
+      path: "deep-learning"
+    values:
+      layout: post
+      category: Deep Learning
+      til: true
+  - scope:
       path: "math"
     values:
       layout: post
