@@ -5,11 +5,12 @@ description: 분야별로 정리한 모든 TIL 기록입니다.
 ---
 
 {% assign til_pages = site.pages | where: "til", true | sort: "date" | reverse %}
+{% assign date_groups = til_pages | group_by_exp: "post", "post.date | date: '%Y-%m-%d'" %}
 
 <header class="page-header">
   <p class="eyebrow">ALL NOTES</p>
   <h1>배움 기록 모아보기</h1>
-  <p>왼쪽에서 관심 분야를 고르면 해당 게시글만 빠르게 살펴볼 수 있습니다.</p>
+  <p>왼쪽에서 관심 분야나 작성일을 고르면 해당 게시글만 빠르게 살펴볼 수 있습니다.</p>
 </header>
 
 <div class="category-browser" data-category-browser>
@@ -34,6 +35,22 @@ description: 분야별로 정리한 모든 TIL 기록입니다.
         </button>
       {% endfor %}
     </div>
+
+    {% if date_groups.size > 0 %}
+      <div class="category-sidebar-heading category-date-heading">
+        <h2 id="date-filter-title">작성일</h2>
+      </div>
+
+      <div class="category-filter-list category-date-list" aria-labelledby="date-filter-title">
+        {% for date_group in date_groups %}
+          <button class="category-filter-button" type="button" data-date-filter="{{ date_group.name }}" data-date-filter-button aria-controls="category-posts" aria-pressed="false">
+            <span class="category-filter-icon" aria-hidden="true">📅</span>
+            <span class="category-filter-name">{{ date_group.name | date: "%Y.%m.%d" }}</span>
+            <span class="category-filter-count">{{ date_group.items | size }}</span>
+          </button>
+        {% endfor %}
+      </div>
+    {% endif %}
   </aside>
 
   <section class="category-results" aria-labelledby="category-results-title">
@@ -59,7 +76,7 @@ description: 분야별로 정리한 모든 TIL 기록입니다.
           {% for post in til_pages %}
             {% assign post_number = til_pages.size | minus: forloop.index0 %}
             {% assign modified_date = post.updated | default: post.date %}
-            <article class="category-board-row" data-category-row data-category="{{ post.category | slugify }}" role="row">
+            <article class="category-board-row" data-category-row data-category="{{ post.category | slugify }}" data-created-date="{{ post.date | date: '%Y-%m-%d' }}" role="row">
               <span class="category-board-number" data-post-number role="cell">{{ post_number }}</span>
               <div class="category-board-title-cell" role="cell">
                 <a class="category-board-title" href="{{ post.url | relative_url }}">
@@ -71,13 +88,15 @@ description: 분야별로 정리한 모든 TIL 기록입니다.
                   <span class="category-board-label">{{ post.category }}</span>
                 </a>
               </div>
-              <time class="category-board-created" datetime="{{ post.date | date_to_xmlschema }}" role="cell">{{ post.date | date: "%Y.%m.%d" }}</time>
+              <time class="category-board-created" datetime="{{ post.date | date_to_xmlschema }}" role="cell">
+                <button class="category-board-date-filter" type="button" data-date-filter="{{ post.date | date: '%Y-%m-%d' }}" aria-label="{{ post.date | date: '%Y년 %m월 %d일' }}에 작성한 게시글 보기">{{ post.date | date: "%Y.%m.%d" }}</button>
+              </time>
               <time class="category-board-updated" datetime="{{ modified_date | date_to_xmlschema }}" role="cell">{{ modified_date | date: "%Y.%m.%d" }}</time>
             </article>
           {% endfor %}
         </div>
       </div>
-      <p class="category-filter-empty" data-category-empty hidden>아직 이 카테고리에 작성된 글이 없습니다.</p>
+      <p class="category-filter-empty" data-category-empty hidden>선택한 조건에 해당하는 글이 없습니다.</p>
     {% else %}
       <p class="category-filter-empty">아직 작성된 TIL이 없습니다.</p>
     {% endif %}
