@@ -1,5 +1,5 @@
 ---
-title: 3-1강 퍼셉트론과 선형 결정 경계
+title: 3-2강 MLP의 입력층,은닉층,출력층
 date: 2026-08-20
 updated: 2026-08-20
 description: KANT 강의 '3-2강 MLP의 입력층,은닉층,출력층' 정리
