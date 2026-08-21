@@ -394,7 +394,7 @@ a { color: inherit; text-decoration: none; }
 
 .category-browser {
   display: grid;
-  grid-template-columns: 230px minmax(0, 1fr);
+  grid-template-columns: 260px minmax(0, 1fr);
   padding: 58px 0 90px;
   align-items: start;
   gap: 48px;
@@ -441,6 +441,7 @@ a { color: inherit; text-decoration: none; }
 .category-filter-button.active { border-color: #c7d2fe; color: var(--primary-dark); background: var(--primary-soft); }
 .category-filter-icon { display: grid; width: 31px; height: 31px; place-items: center; border-radius: 9px; background: var(--surface); font-size: 16px; }
 .category-filter-name { overflow: hidden; font-size: 14px; font-weight: 750; text-overflow: ellipsis; white-space: nowrap; }
+.category-date-list .category-filter-name { overflow: visible; text-overflow: clip; }
 .category-filter-count { display: grid; min-width: 25px; height: 25px; padding: 0 7px; place-items: center; border-radius: 999px; color: var(--muted); background: var(--surface-soft); font-size: 11px; font-weight: 800; }
 .category-filter-button.active .category-filter-count { color: #fff; background: var(--primary); }
 
