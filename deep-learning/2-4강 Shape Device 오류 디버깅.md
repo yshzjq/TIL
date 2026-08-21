@@ -1,8 +1,8 @@
 ---
-title: 2-3강 CPU/GPU device와 .to(device)
+title: 2-4강 Shape Device 오류 디버깅
 date: 2026-08-20
 updated: 2026-08-20
-description: KANT 강의 '2-3강 CPU/GPU device와 .to(device)' 정리
+description: KANT 강의 '2-4강 Shape Device 오류 디버깅' 정리
 ---
 
 ## 1. 딥러닝 오류를 읽는 기본 순서
