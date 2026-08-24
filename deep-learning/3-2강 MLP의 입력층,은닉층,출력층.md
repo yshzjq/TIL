@@ -1,7 +1,7 @@
 ---
 title: 3-2강 MLP의 입력층,은닉층,출력층
 date: 2026-08-20
-updated: 2026-08-20
+updated: 2026-08-24
 description: KANT 강의 '3-2강 MLP의 입력층,은닉층,출력층' 정리
 ---
 
@@ -19,7 +19,7 @@ MLP는 **Multi-Layer Perceptron**의 줄임말입니다. 한국어로는 다층 
 
 이름 그대로 여러 층을 가진 퍼셉트론 구조
 
-```
+```plain
 Perceptron 하나       -> 선형 경계 하나
 Perceptron 여러 개    -> 여러 방향의 신호 계산
 Layer 여러 개          -> 표현을 단계적으로 변환
@@ -42,7 +42,7 @@ MLP는 보통 세 종류의 층으로 설명.
 
 예를 들어 학생 4명의 데이터를 가지고 3개 feature로 2개 클래스를 분류한다고 가정
 
-```
+```plain
 입력 X shape       : (4, 3)
 은닉층 출력 shape  : (4, 5)
 최종 출력 shape    : (4, 2)
@@ -54,7 +54,7 @@ MLP에서 각 층이 바꾸는 것은 보통 feature 차원입니다. batch 차�
 
 ## 4. MLP에서 shape 흐름 읽기
 
-```
+```plain
 input_dim = 3
 hidden_dim = 5
 num_classes = 2
@@ -62,7 +62,7 @@ num_classes = 2
 
 입력 Tensor가 `(4, 3)`이면 shape 흐름
 
-```
+```plain
 X                         : (4, 3)
 Linear(3, 5) 통과 후      : (4, 5)
 ReLU 통과 후              : (4, 5)
@@ -86,16 +86,16 @@ PyTorch에서는 `nn.Linear`를 이용해 선형층을 만들 수 있다.
 import torch
 import torch.nn as nn
 
-# 재현 가능한 예시를 위해 seed를 고정합니다.
+# 재현 가능한 예시를 위해 seed를 고정
 torch.manual_seed(42)
 
-# 샘플 4개, feature 3개인 입력입니다.
+# 샘플 4개, feature 3개인 입력
 X = torch.randn(4, 3)
 
 # MLP 구조를 정의합니다.
-# Linear(3, 5): 입력 feature 3개를 hidden feature 5개로 변환합니다.
-# ReLU(): 은닉층 결과에 비선형성을 추가합니다. 자세한 내용은 4장에서 다룹니다.
-# Linear(5, 2): hidden feature 5개를 class 2개에 대한 점수로 변환합니다.
+# Linear(3, 5): 입력 feature 3개를 hidden feature 5개로 변환
+# ReLU(): 은닉층 결과에 비선형성을 추가
+# Linear(5, 2): hidden feature 5개를 class 2개에 대한 점수로 변환
 model = nn.Sequential(
     nn.Linear(3, 5),
     nn.ReLU(),
@@ -112,14 +112,14 @@ print(logits)
 
 예상 출력
 
-```
+```plain
 X shape     : torch.Size([4, 3])
 logits shape: torch.Size([4, 2])
 ```
 
 여기서 `logits`의 shape가 `(4, 2)`인 이유
 
-```
+```plain
 4개 샘플 각각에 대해
 2개 클래스의 점수를 출력
 ```
@@ -136,18 +136,18 @@ torch.manual_seed(42)
 
 X = torch.randn(4, 3)
 
-# 각 층을 변수로 분리해서 정의합니다.
+# 각 층을 변수로 분리해서 정의
 fc1 = nn.Linear(3, 5)
 relu = nn.ReLU()
 fc2 = nn.Linear(5, 2)
 
-# 1번째 Linear를 통과합니다.
+# 1번째 Linear를 통과
 hidden_linear = fc1(X)
 
-# ReLU를 통과합니다.
+# ReLU를 통과
 hidden_activated = relu(hidden_linear)
 
-# 마지막 Linear를 통과합니다.
+# 마지막 Linear를 통과
 logits = fc2(hidden_activated)
 
 print("X               :", X.shape)
@@ -158,7 +158,7 @@ print("logits          :", logits.shape)
 
 출력
 
-```
+```plain
 X               : torch.Size([4, 3])
 hidden_linear   : torch.Size([4, 5])
 hidden_activated: torch.Size([4, 5])
@@ -176,7 +176,7 @@ MLP에서 자주 나오는 용어
 | hidden size | 은닉층 출력 feature 수 |
 
 층의 수를 셀 때는 자료마다 입력층을 포함하는지, 학습 가능한 Linear 층만 세는지가 다를 수 가 있다<br>
-이번 정리 내용은 학습 가능한 Linear 층 수를 기준으로 말한다.<br>
+
 아래 모델은 Linear 층 2개, 은닉층 1개인 MLP
 
 다음 모델은 은닉층이 1개이고 hidden size가 5, 아래 두 짧은 블록은 [앞 셀 실행]이며,  import torch.nn as nn을 사용
@@ -210,7 +210,7 @@ hidden size가 커지면 parameter 수가 늘어난다
 
 구조
 
-```
+```plain
 input_dim = 3
 hidden_dim = 5
 num_classes = 2
@@ -218,7 +218,7 @@ num_classes = 2
 
 첫 번째 Linear의 parameter 수
 
-```
+```plain
 weight 수 = 3 * 5 = 15
 bias 수   = 5
 합계      = 20
@@ -226,7 +226,7 @@ bias 수   = 5
 
 두 번째 Linear의 parameter 수
 
-```
+```plain
 weight 수 = 5 * 2 = 10
 bias 수   = 2
 합계      = 12
@@ -246,8 +246,8 @@ model = nn.Sequential(
     nn.Linear(5, 2)
 )
 
-# 모델의 학습 가능한 parameter 수를 계산합니다.
-# p.numel()은 해당 parameter Tensor 안의 원소 개수를 의미합니다.
+# 모델의 학습 가능한 parameter 수를 계산
+# p.numel()은 해당 parameter Tensor 안의 원소 개수를 의미
 total_params = sum(p.numel() for p in model.parameters())
 
 print("total parameters:", total_params)
@@ -259,7 +259,7 @@ for name, param in model.named_parameters():
 
 예상 출력
 
-```
+```plain
 total parameters: 32
 0.weight torch.Size([5, 3]) numel= 15
 0.bias torch.Size([5]) numel= 5
@@ -291,7 +291,7 @@ for hidden_dim in [2, 5, 10, 20]:
 
 출력
 
-```
+```plain
 hidden_dim= 2 -> total_params=14
 hidden_dim= 5 -> total_params=32
 hidden_dim=10 -> total_params=62
