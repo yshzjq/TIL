@@ -64,6 +64,18 @@ description: 분야별로 정리한 모든 TIL 기록입니다.
     </div>
 
     {% if til_pages.size > 0 %}
+      <div class="category-list-toolbar">
+        <label for="posts-per-page">페이지당 글 수</label>
+        <select id="posts-per-page" data-page-size>
+          <option value="10" selected>10개</option>
+          <option value="15">15개</option>
+          <option value="20">20개</option>
+          <option value="25">25개</option>
+          <option value="30">30개</option>
+        </select>
+        <span class="category-page-range" data-page-range aria-live="polite"></span>
+      </div>
+
       <div class="category-board" data-category-board role="table" aria-label="TIL 게시글 목록">
         <div class="category-board-header" role="row">
           <span role="columnheader">번호</span>
@@ -96,6 +108,7 @@ description: 분야별로 정리한 모든 TIL 기록입니다.
           {% endfor %}
         </div>
       </div>
+      <nav class="category-pagination" data-category-pagination aria-label="게시글 페이지 선택"></nav>
       <p class="category-filter-empty" data-category-empty hidden>선택한 조건에 해당하는 글이 없습니다.</p>
     {% else %}
       <p class="category-filter-empty">아직 작성된 TIL이 없습니다.</p>

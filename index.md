@@ -13,6 +13,7 @@ description: 매일 배운 내용을 차곡차곡 기록하는 개발 학습 노
   <p class="hero-description">공부하며 새롭게 이해한 내용을 짧고 명확하게 기록합니다.<br class="desktop-only"> 작은 기록이 쌓여 단단한 지식이 되는 공간입니다.</p>
   <div class="hero-actions">
     <a class="button button-primary" href="#recent">최근 기록 보기</a>
+    <a class="button button-accent" href="{{ '/categories/' | relative_url }}">전체 글 보기</a>
   </div>
   <div class="hero-stat" aria-label="작성한 TIL 수">
     <strong>{{ til_pages | size }}</strong>
