@@ -38,24 +38,8 @@ layout: default
 
     {% assign all_til_pages = site.pages | where: "til", true | sort: "date" | reverse %}
     {% assign category_til_pages = all_til_pages | where: "category", page.category %}
-    {% assign category_scope = page.category | slugify %}
-    <section class="nearby-posts" data-nearby-posts aria-labelledby="nearby-posts-title">
-      <div class="nearby-posts-heading">
-        <div>
-          <p class="eyebrow">NEARBY NOTES</p>
-          <h2 id="nearby-posts-title">근처 게시글</h2>
-        </div>
-        <div class="nearby-posts-tabs" role="group" aria-label="근처 게시글 범위">
-          <button class="nearby-posts-tab active" type="button" data-nearby-scope-button="all" aria-pressed="true">전체 게시글</button>
-          <button class="nearby-posts-tab" type="button" data-nearby-scope-button="{{ category_scope }}" aria-pressed="false">{{ page.category }}</button>
-        </div>
-      </div>
-
-      {% include nearby-post-list.html posts=all_til_pages scope="all" label="전체 게시글" %}
-      {% include nearby-post-list.html posts=category_til_pages scope=category_scope label=page.category hidden=true %}
+    <section class="nearby-posts" aria-label="{{ page.category }} 게시글 목록">
+      {% include nearby-post-list.html posts=category_til_pages %}
     </section>
   </footer>
 </article>
-
-{% assign asset_version = site.github.build_revision | default: '1' %}
-<script src="{{ '/assets/js/nearby-posts.js' | relative_url }}?v={{ asset_version }}" defer></script>

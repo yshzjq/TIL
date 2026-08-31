@@ -20,7 +20,7 @@
 {% endif %}
 {% assign window_end = window_start | plus: 5 %}
 
-<ol class="nearby-posts-list" data-nearby-scope-panel="{{ include.scope }}" aria-label="{{ include.label }} 기준 근처 게시글"{% if include.hidden %} hidden{% endif %}>
+<ol class="nearby-posts-list">
   {% for nearby_post in nearby_posts %}
     {% if forloop.index0 >= window_start and forloop.index0 < window_end %}
       {% assign is_current = false %}
@@ -31,7 +31,7 @@
         {% if is_current %}
           <span class="nearby-post-link" aria-current="page">
         {% else %}
-          <a class="nearby-post-link" href="{{ nearby_post.url | relative_url }}{% unless include.scope == 'all' %}?scope={{ include.scope | url_encode }}{% endunless %}">
+          <a class="nearby-post-link" href="{{ nearby_post.url | relative_url }}">
         {% endif %}
             <span class="nearby-post-meta">
               <span class="nearby-post-category">{{ nearby_post.category }}</span>
