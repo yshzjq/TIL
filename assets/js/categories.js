@@ -16,6 +16,7 @@
 
   let filteredRows = rows;
   let currentPage = 1;
+  let activeScope = "all";
 
   const getPageSize = () => Number(pageSizeSelect?.value) || 10;
 
@@ -70,6 +71,18 @@
     renderPagination(pageCount);
   };
 
+  const updatePostLinks = () => {
+    rows.forEach((row) => {
+      const link = row.querySelector(".category-board-title");
+      if (!link) return;
+
+      const url = new URL(link.href);
+      if (activeScope === "all") url.searchParams.delete("scope");
+      else url.searchParams.set("scope", activeScope);
+      link.href = url;
+    });
+  };
+
   const showRows = (visibleRows, heading, description) => {
     const count = visibleRows.length;
     filteredRows = visibleRows;
@@ -90,6 +103,7 @@
     if (!activeButton) return;
 
     const category = activeButton.dataset.categoryFilter;
+    activeScope = category;
     const visibleRows = rows.filter(
       (row) => category === "all" || row.dataset.category === category
     );
@@ -111,6 +125,7 @@
       category === "all" ? "전체 게시글" : `${label} 게시글`,
       description
     );
+    updatePostLinks();
 
     if (updateUrl) {
       const url = new URL(window.location.href);
@@ -122,6 +137,7 @@
   const activateDate = (date, updateUrl = false) => {
     const visibleRows = rows.filter((row) => row.dataset.createdDate === date);
     const formattedDate = date.replaceAll("-", ".");
+    activeScope = "all";
 
     categoryButtons.forEach((button) => {
       button.classList.remove("active");
@@ -134,6 +150,7 @@
     });
 
     showRows(visibleRows, `${formattedDate} 작성 게시글`, `${formattedDate}에 작성한 배움 기록`);
+    updatePostLinks();
 
     if (updateUrl) {
       const url = new URL(window.location.href);
