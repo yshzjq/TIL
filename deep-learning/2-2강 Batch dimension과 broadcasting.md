@@ -1,19 +1,19 @@
 ---
 title: 2-2강 Batch dimension과 broadcasting
 date: 2026-08-20
-updated: 2026-08-20
+updated: 2026-09-01
 description: KANT 강의 '2-2강 Batch dimension과 broadcasting' 정리
 ---
 
 ## 1. Batch dimension이란?
 
-딥러닝 모델은 데이터를 여러 개를 묶어서 한 번에 처리합니다.
+딥러닝 모델은 데이터를 여러 개를 묶어서 한 번에 처리한다
 
 이 묶음을 **batch**라고 한다.
 
 예를 들어 학생 한 명의 정보가 있으면
 
-```
+```plain
 [키,몸무게,공부시간,수면시간]
 ```
 
@@ -30,11 +30,11 @@ print(one_student.shape)
 
 출력
 
-```
+```plain
 torch.Size([4])
 ```
 
-하지만 학생 3명을 한 번에 모델에 넣으려면 다음처럼 만듭니다.
+하지만 학생 3명을 한 번에 모델에 넣으려면 만든다
 
 ```python
 # 학생 3명, 각 학생마다 feature 4개
@@ -47,14 +47,13 @@ students = torch.tensor([
 print(students.shape)
 ```
 
-출력은 다음과 같습니다.
+출력
 
-```
+```plain
 torch.Size([3,4])
 ```
-`torch.Size([3, 4])`는 다음처럼 읽는다.
 
-```
+```plain
 batch size = 3
 feature 수 = 4
 ```
@@ -67,9 +66,9 @@ feature 수 = 4
 
 표 데이터는 보통 `(batch_size, features)` 형태.
 
-이미지 데이터는 보통 다음 형태를 사용합니다.
+이미지 데이터는 보통 다음 형태를 사용
 
-```
+```plain
 (batch_size, channels, height, width)
 ```
 
@@ -87,10 +86,9 @@ print(images.shape)
 
 출력
 
-```
+```plain
 torch.Size([32,3,224,224])
 ```
-
 
 | 위치 | 값 | 의미 |
 | --- | --- | --- |
@@ -101,9 +99,9 @@ torch.Size([32,3,224,224])
 
 ## 3. `unsqueeze`로 batch 차원 추가하기
 
-샘플 하나만 있을 때도 모델은 batch 형태를 기대할 수 있습니다.
+샘플 하나만 있을 때도 모델은 batch 형태를 기대할 수 있다.
 
-이럴 때는 `unsqueeze`로 차원을 하나 추가합니다.
+이럴 때는 `unsqueeze`로 차원을 하나 추가한다
 
 ```python
 import torch
@@ -122,7 +120,7 @@ print("after :", sample_batch.shape)
 
 출력
 
-```
+```plain
 before: torch.Size([4])
 after : torch.Size([1, 4])
 ```
@@ -144,9 +142,9 @@ y = x.squeeze(0)
 print("after :", y.shape)
 ```
 
-예상 출력은 다음과 같습니다.
+출력
 
-```
+```plain
 before: torch.Size([1, 4])
 after : torch.Size([4])
 ```
@@ -158,8 +156,6 @@ after : torch.Size([4])
 ## 5. Broadcasting이란?
 
 Broadcasting은 서로 다른 shape의 Tensor를 연산할 때, PyTorch가 가능한 경우 자동으로 크기를 맞춰주는 규칙.
-
-예를 들어 다음 연산을 보겠습니다.
 
 ```python
 import torch
@@ -179,9 +175,9 @@ print(result)
 print(result.shape)
 ```
 
-출력은 다음과 같습니다.
+출력
 
-```
+```plain
 tensor([[11., 22., 33.],
         [14., 25., 36.]])
 torch.Size([2, 3])
@@ -191,7 +187,7 @@ torch.Size([2, 3])
 
 PyTorch는 `bias`를 다음처럼 해석.
 
-```
+```plain
 bias shape: (3,)
 자동 해석: (1, 3)
 x shape   : (2, 3)
@@ -206,14 +202,14 @@ x shape   : (2, 3)
 
 Broadcasting은 shape를 오른쪽부터 비교합니다.
 
-```
+```plain
 x shape:    (2, 3, 4)
 y shape:       (3, 1)
 ```
 
 차원 수가 다르면 짧은 쪽 앞에 1이 있다고 생각한다.
 
-```
+```plain
 x shape:    (2, 3, 4)
 y shape:    (1, 3, 1)
 ```
@@ -226,14 +222,13 @@ y shape:    (1, 3, 1)
 | 가운데 차원 | 3 | 3 | 가능, 같음 |
 | 첫 번째 차원 | 2 | 1 | 가능, 1은 확장 가능 |
 
-
-```
+```plain
 result shape: (2, 3, 4)
 ```
 
 ## 7. Broadcasting이 실패하는 경우
 
-다음은 실패하는 예시입
+예시
 
 ```python
 import torch
@@ -243,18 +238,18 @@ y = torch.randn(2)
 
 # x shape: (2, 3)
 # y shape: (2,)
-# y는 자동으로 (1, 2)처럼 해석됩니다.
-# 마지막 차원에서 3과 2가 맞지 않으므로 오류가 발생합니다.
+# y는 자동으로 (1, 2)처럼 해석
+# 마지막 차원에서 3과 2가 맞지 않으므로 오류가 발생한다
 result = x + y
 ```
 
-오류 메시지는 다음과 비슷합니다.
+오류 메시지
 
-```
+```plain
 RuntimeError: The size of tensor a (3) must match the size of tensor b (2)
 ```
 
-이 문제를 해결하려면 `y`의 shape가 어느 차원에 맞아야 하는지 명확히 해야 합니다.
+이 문제를 해결하려면 `y`의 shape가 어느 차원에 맞아야 하는지 명확히 해야 한다
 
 ```python
 import torch
@@ -271,9 +266,9 @@ print(y.shape)
 print(result.shape)
 ```
 
-예상 출력은 다음과 같습니다.
+출력
 
-```
+```plain
 torch.Size([2,3])
 torch.Size([2,1])
 torch.Size([2,3])
@@ -281,9 +276,7 @@ torch.Size([2,3])
 
 ## 8. 의도치 않은 Broadcasting
 
-Broadcasting은 편리하지만 위험할 때가 있습니다.
-
-다음 예시를 보겠습니다.
+Broadcasting은 편리하지만 위험할 때가 있다.
 
 ```python
 import torch
@@ -312,7 +305,7 @@ print(diff)
 
 출력
 
-```
+```plain
 pred shape  : torch.Size([4, 1])
 target shape: torch.Size([4])
 diff shape: torch.Size([4, 4])
@@ -322,11 +315,11 @@ tensor([[ 0.1, -0.9,  0.1, -0.9],
         [ 0.4, -0.6,  0.4, -0.6]])
 ```
 
-첫 번째 예측값 `0.1`이 첫 번째 정답뿐 아니라 네 정답 모두와 비교되었습니다. 우리는 `pred`와 `target`을 샘플별로 하나씩 빼고 싶었습니다.
+첫 번째 예측값 `0.1`이 첫 번째 정답뿐 아니라 네 정답 모두와 비교되었다. 우리는 `pred`와 `target`을 샘플별로 하나씩 빼고 싶었습니다.
 
 하지만 결과는 `(4, 4)`가 된다.
 
-```
+```plain
 pred shape  : (4, 1)
 target shape:    (4,)
 자동 해석    : (1, 4)
@@ -351,7 +344,7 @@ pred = torch.tensor([
 
 target = torch.tensor([0.0, 1.0, 0.0, 1.0])
 
-# target을 (4,)에서 (4, 1)로 바꿉니다.
+# target을 (4,)에서 (4, 1)로 바꾼다
 target = target.unsqueeze(1)
 
 diff = pred - target
@@ -362,9 +355,9 @@ print("diff shape  :", diff.shape)
 print(diff)
 ```
 
-예상 출력은 다음과 같습니다.
+출력
 
-```
+```plain
 pred shape  : torch.Size([4, 1])
 target shape: torch.Size([4, 1])
 diff shape  : torch.Size([4, 1])
@@ -373,7 +366,6 @@ tensor([[ 0.1],
         [ 0.3],
         [-0.6]])
 ```
-
 
 Loss를 계산하기 전에는 항상 예측값과 정답값의 shape를 출력해서 봐야한다.
 
@@ -384,7 +376,7 @@ print("target:", target.shape)
 
 ## 10. shape 검증 습관 만들기
 
-실전 코드에서는 `assert`를 사용하면 좋습니다.
+실전 코드에서는 `assert`를 사용하면 좋다.
 
 ```python
 import torch
@@ -392,8 +384,8 @@ import torch
 pred = torch.randn(4, 1)
 target = torch.randn(4, 1)
 
-# 두 Tensor의 shape가 같은지 확인합니다.
-# 다르면 여기서 바로 멈추고 오류를 냅니다.
+# 두 Tensor의 shape가 같은지 확인.
+# 다르면 여기서 바로 멈추고 오류를 낸다.
 assert pred.shape == target.shape, f"shape mismatch: pred={pred.shape}, target={target.shape}"
 
 loss = ((pred - target) ** 2).mean()
@@ -406,7 +398,3 @@ print(loss)
 `assert`는 초반 실습에서 특히 유용하다. <br>
 모델 코드가 길어질수록 오류가 뒤늦게 발견되면 원인을 찾기 어렵다.<br>
 그래서 중요한 연산 직전에 shape를 확인하는 코드를 넣어두면 디버깅 시간이 줄어든다.
-
-
-
-
