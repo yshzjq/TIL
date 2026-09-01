@@ -1,7 +1,7 @@
 ---
 title: 2-1강 Tensor 생성과 dtype
 date: 2026-08-19
-updated: 2026-08-20
+updated: 2026-09-01
 description: KANT 강의 '2-1강 Tensor 생성과 dtype' 정리
 ---
 
@@ -30,11 +30,11 @@ Tensor는 다음과 같이 생각하면 됩니다.
 
 ## 2. Tensor의 차원 이해하기
 
-Tensor의 차원은 “몇 겹으로 숫자가 감싸져 있는가”를 뜻합니다.
+Tensor의 차원은 “몇 겹으로 숫자가 감싸져 있는가”를 뜻한다
 
 ### 0차원 Tensor: Scalar
 
-숫자 하나입니다.
+스칼라는 숫자 하나다.
 
 ```python
 import torch
@@ -48,18 +48,17 @@ print(scalar.shape)
 print(scalar.ndim)
 ```
 
-출력 결과
+출력
 
-```
+```plain
 tensor(7)
 torch.Size([])
 0
 ```
 
-`torch.Size([])`는 비어 있는 것처럼 보이지만, 오류가 아닙니다.
+`torch.Size([])`는 비어 있는 것처럼 보이지만, 오류가 아니다
 
 값이 하나뿐이라서 행도 열도 없는 **0차원 Tensor**라는 뜻이다.
-
 
 ### 1차원 Tensor: Vector
 
@@ -77,14 +76,13 @@ print(vector.ndim)
 
 예상 출력
 
-```
+```plain
 tensor([1, 2, 3])
 torch.Size([3])
 1
 ```
 
 `torch.Size([3])`은 값이 3개 있는 1차원 Tensor라는 뜻.
-
 
 ### 2차원 Tensor: Matrix
 
@@ -105,22 +103,21 @@ print(matrix.ndim)
 
 예상 출력
 
-```
+```plain
 tensor([[1, 2, 3],
         [4, 5, 6]])
 torch.Size([2, 3])
 2
 ```
 
-`torch.Size([2, 3])`은 다음처럼 읽습니다.
+`torch.Size([2, 3])`은 다음처럼 읽는다
 
-```
+```plain
 2개의 행이 있고,
 각 행마다 3개의 값이 있습니다.
 ```
 
-즉, 2행 3열입니다.
-
+2행 3열
 
 ### 3차원 Tensor: 여러 개의 행렬 묶음
 
@@ -146,14 +143,12 @@ print(tensor_3d.ndim)
 
 예상 출력
 
-```
+```plain
 torch.Size([2, 2, 3])
 3
 ```
 
-
-
-```
+```plain
 `torch.Size([2, 2, 3])`
 
 2개의 묶음이 있고, 각 묶음 안에는 2개의 행이 있고, 각 행에는 3개의 값이 있습니다.
@@ -173,7 +168,7 @@ shape는 Tensor의 구조를 왼쪽에서 오른쪽으로 설명
 
 ## 4. Tensor 속성 확인하기
 
-PyTorch Tensor는 값만 가지고 있는 것이 아닙니다.
+PyTorch Tensor는 값만 가지고 있는 것이 아니다
 
 Tensor는 다음 정보를 함께 가지고 있습니다.
 
@@ -206,7 +201,7 @@ print("device:", x.device)
 
 예상 출력
 
-```
+```plain
 shape: torch.Size([3, 4])
 ndim: 2
 dtype: torch.float32
@@ -229,10 +224,9 @@ device: cpu
 반면 `CrossEntropyLoss`로 다중 클래스 분류를 할 때의 정답은 보통 정수 클래스 번호다.<br>
 이진 분류의 `BCEWithLogitsLoss` target은 예외로, 0/1 값을 가진 실수형 Tensor를 사용.
 
-
 ### CrossEntropyLoss 예시
 
-예를 들어 이미지를 고양이 / 강아지 / 토끼 중 하나로 분류한다고 해보자.
+예를 들어 이미지를 고양이 / 강아지 / 토끼 중 하나로 분류한다고 가정
 
 고양이 = 0
 강아지 = 1
@@ -250,17 +244,16 @@ target = 1
 
 #
 
-
 ```python
 import torch
 
-# 입력 데이터는 보통 실수형 Tensor로 다룹니다.
+# 입력 데이터는 보통 실수형 Tensor로 다룬다
 features = torch.tensor([
     [0.1, 0.2, 0.3],
     [0.4, 0.5, 0.6]
 ], dtype=torch.float32)
 
-# 분류 라벨은 보통 정수형 Tensor로 다룹니다.
+# 분류 라벨은 보통 정수형 Tensor로 다룬다
 # 예: 0번 클래스, 2번 클래스
 labels = torch.tensor([0, 2], dtype=torch.long)
 
@@ -270,22 +263,22 @@ print(labels.dtype)
 
 ⛔ **주의사항**
 
-분류 target의 dtype은 loss 함수에 따라 다릅니다.
+분류 target의 dtype은 loss 함수에 따라 다르다
 
-```
+```plain
 CrossEntropyLoss + class index target: torch.long
 BCEWithLogitsLoss + 0/1 target: torch.float32 등 입력과 같은 실수형
 ```
 
-같은 ‘분류 라벨’이라도 loss가 기대하는 형식을 먼저 확인해야 합니다.
+같은 ‘분류 라벨’이라도 loss가 기대하는 형식을 먼저 확인해야 한다
 
----
+***
 
 ## 6. Tensor 생성 방법
 
 ### `torch.tensor`
 
-직접 값을 넣어 Tensor를 만듭니다.
+직접 값을 넣어 Tensor를 만든다
 
 ```python
 import torch
@@ -299,7 +292,7 @@ print(x.dtype)
 
 출력
 
-```
+```plain
 tensor([1, 2, 3])
 torch.int64
 ```
@@ -349,7 +342,7 @@ print(batch.shape)
 
 실전에서는 Tensor가 많아집니다.
 
-그래서 매번 `shape`, `dtype`, `device`를 따로 출력하기보다, 디버깅용 함수를 만들어두면 좋습니다.
+그래서 매번 `shape`, `dtype`, `device`를 따로 출력하기보다, 디버깅용 함수를 만들어두면 좋다.
 
 ```python
 import torch
@@ -376,9 +369,9 @@ describe_tensor("x", x)
 describe_tensor("y", y)
 ```
 
-예상 출력
+출력
 
-```
+```plain
 [x]
   shape : torch.Size([4, 5])
   ndim  : 2
@@ -396,7 +389,7 @@ describe_tensor("y", y)
 
 앞으로 오류가 나면 가장 먼저 다음 세 줄을 출력하세요.
 
-```
+```plain
 print(x.shape)
 print(x.dtype)
 print(x.device)
