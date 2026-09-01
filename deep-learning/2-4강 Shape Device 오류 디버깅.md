@@ -1,30 +1,30 @@
 ---
 title: 2-4강 Shape Device 오류 디버깅
 date: 2026-08-20
-updated: 2026-08-20
+updated: 2026-09-01
 description: KANT 강의 '2-4강 Shape Device 오류 디버깅' 정리
 ---
 
 ## 1. 딥러닝 오류를 읽는 기본 순서
 
-```
-1. RuntimeError가 있는 마지막 줄을 봅니다.
-2. shape, dtype, device 중 무엇이 문제인지 분류합니다.
-3. 오류가 난 연산 직전의 Tensor 정보를 출력합니다.
-4. 모델이 기대한 값과 실제 Tensor 정보를 비교합니다.
-5. 수정 후 다시 shape, dtype, device를 출력합니다.
+```plain
+1. RuntimeError가 있는 마지막 줄을 본다
+2. shape, dtype, device 중 무엇이 문제인지 분류한다
+3. 오류가 난 연산 직전의 Tensor 정보를 출력
+4. 모델이 기대한 값과 실제 Tensor 정보를 비교
+5. 수정 후 다시 shape, dtype, device를 출력
 ```
 
 ## 2. 디버깅용 함수 준비하기
 
-먼저 Tensor 정보를 출력하는 함수를 준비합니다.
+먼저 Tensor 정보를 출력하는 함수를 준비한다
 
 ```python
 import torch
 
 def describe_tensor(name, tensor):
     """
-    디버깅을 위해 Tensor의 핵심 정보를 출력합니다.
+    디버깅을 위해 Tensor의 핵심 정보를 출력한다
     """
     print(f"[{name}]")
     print(f"  shape : {tensor.shape}")
@@ -36,9 +36,9 @@ def describe_tensor(name, tensor):
 
 ## 3. 오류 1: `nn.Linear` 입력 차원 오류
 
-`nn.Linear`는 입력 Tensor의 마지막 차원이 `in_features`와 같아야 합니다. 
+`nn.Linear`는 입력 Tensor의 마지막 차원이 `in_features`와 같아야 한다
 
-출력은 마지막 차원이 `out_features`로 바뀝니다.
+출력은 마지막 차원이 `out_features`로 바뀐다
 
 ### 깨진 코드
 
@@ -48,8 +48,8 @@ import torch.nn as nn
 
 model = nn.Linear(in_features=4, out_features=2)
 
-# 모델은 feature 4개를 기대합니다.
-# 그런데 실제 입력은 feature가 5개입니다.
+# 모델은 feature 4개를 기대한다
+# 그런데 실제 입력은 feature가 5개다
 x_wrong = torch.randn(8, 5)
 
 try:
@@ -58,9 +58,10 @@ except RuntimeError as e:
     print("오류 발생!")
     print(e)
 ```
-오류 메시지는 다음과 비슷합니다.
 
-```
+오류 메시지
+
+```plain
 RuntimeError: mat1 and mat2 shapes cannot be multiplied
 
 Linear 계층이 기대한 입력 feature 수와
@@ -75,9 +76,10 @@ describe_tensor("x_wrong", x_wrong)
 print("model expects in_features:", model.in_features)
 print("actual input last dim 
 ```
-예상 출력
 
-```
+출력
+
+```plain
 [x_wrong]
   shape : torch.Size([8, 5])
   ndim  : 2
@@ -88,7 +90,7 @@ model expects in_features: 4
 actual input last dim    : 5
 ```
 
-```
+```plain
 모델 기대값: 4
 실제 입력값: 5
 ```
@@ -111,7 +113,7 @@ print(output.shape)
 
 출력
 
-```
+```plain
 torch.Size([8, 2])
 ```
 
@@ -121,7 +123,7 @@ torch.Size([8, 2])
 import torch
 import torch.nn as nn
 
-# 실제 입력 feature가 5개라면 모델의 in_features를 5로 바꿉니다.
+# 실제 입력 feature가 5개라면 모델의 in_features를 5로 바꾼다
 model = nn.Linear(in_features=5, out_features=2)
 
 x = torch.randn(8, 5)
@@ -131,15 +133,17 @@ output = model(x)
 print(output.shape)
 ```
 
-출력은 다음과 같습니다.
+출력
 
-```
+```plain
 torch.Size([8,2])
 ```
 
 ## 4. 오류 2: batch 차원 누락
 
 샘플 하나를 모델에 넣을 때 batch 차원이 빠져도 `nn.Linear`는 동작할 수 있다.
+
+`sample`의 마지막 차원이 `in_features=4`와 일치하기 때문에 처리되는 것
 
 하지만 학습 코드 전체에서는 shape가 헷갈릴 수 있으므로 보통 batch 차원을 유지하는 편이 좋다
 
@@ -158,13 +162,15 @@ output = model(sample)
 print("sample:", sample.shape)
 print("output:", output.shape)
 ```
-출력은 다음과 같습니다.
 
-```
+출력
+
+```plain
 sample: torch.Size([4])
 output: torch.Size([2])
 ```
-하지만 학습 루프에서는 보통 다음 형태가 더 안전합니다.
+
+하지만 학습 루프에서는 보통 다음 형태가 더 안전하다
 
 ```python
 import torch
@@ -183,23 +189,25 @@ output = model(sample_batch)
 print("sample_batch:", sample_batch.shape)
 print("output      :", output.shape)
 ```
-```
+
+```plain
 sample_batch: torch.Size([1, 4])
 output      : torch.Size([1, 2])
 ```
+
 ## 5. 오류 3: `CrossEntropyLoss` target dtype 오류
 
-분류 문제에서는 `nn.CrossEntropyLoss`를 자주 사용합니다.
+분류 문제에서는 `nn.CrossEntropyLoss`를 자주 사용한다
 
 보통 모델 출력 shape
 
-```
+```plain
 logits shape: (batch_size, num_classes)
 ```
 
 정답 라벨 shape
 
-```
+```plain
 target shape: (batch_size,)
 ```
 
@@ -227,9 +235,10 @@ except RuntimeError as e:
     print(e)
 ```
 
-```
+```plain
 RuntimeError: expected scalar type Long but found Float
 ```
+
 ### 오류 확인
 
 ```python
@@ -239,7 +248,7 @@ describe_tensor("target_wrong", target_wrong)
 
 예상 출력은 다음과 같습니다.
 
-```
+```plain
 [logits]
   shape : torch.Size([4, 3])
   ndim  : 2
@@ -252,12 +261,14 @@ describe_tensor("target_wrong", target_wrong)
   dtype : torch.float32
   device: cpu
 ```
+
 문제는 `target_wrong.dtype`입니다.
 
-```
+```plain
 현재 dtype: torch.float32
 필요 dtype: torch.long
 ```
+
 ### 수정 코드
 
 ```python
@@ -275,6 +286,7 @@ loss = criterion(logits, target)
 
 print(loss)
 ```
+
 이미 만들어진 Tensor를 변환할 수 있다.
 
 ```python
@@ -305,14 +317,18 @@ if torch.cuda.is_available():
 else:
     print("현재 환경에서는 CUDA를 사용할 수 없어 예시를 건너뜁니다.")
 ```
+
 오류 확인
+
 ```python
 if torch.cuda.is_available():
     print("model device:", next(model.parameters()).device)
     print("x_cpu device:", x_cpu.device)
 ```
+
 출력
-```
+
+```plain
 model device: cuda:0
 x_cpu device: cpu
 ```
@@ -355,15 +371,15 @@ print("loss_wrong :", loss_wrong)
 
 출력은 다음과 같습니다.
 
-```
+```plain
 pred shape  : torch.Size([4, 1])
 target shape: torch.Size([4])
 pred-target : torch.Size([4, 4])
 ```
 
-오류는 나지 않았지만, `pred - target`의 shape가 `(4, 4)`가 되었습니다.
+오류는 나지 않았지만, `pred - target`의 shape가 `(4, 4)`가 된다
 
-이것은 샘플별 차이를 계산한 것이 아니라 모든 조합의 차이를 계산
+이것은 샘플 별 차이를 계산한 것이 아니라 모든 조합의 차이를 계산
 
 ### 수정 코드
 
