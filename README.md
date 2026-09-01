@@ -34,7 +34,7 @@ description: 선형 회귀가 데이터를 학습하는 기본 원리를 정리�
 본문을 작성합니다.
 ```
 
-지원하는 폴더는 `machine-learning`, `deep-learning`, `deep-learning-advanced`, `math`, `python`입니다. 다른 폴더를 추가하려면 `_config.yml`의 `defaults`, `_data/categories.yml`, `admin/config.yml`에도 해당 카테고리를 추가합니다.
+지원하는 폴더는 `machine-learning`, `deep-learning`, `deep-learning-advanced`, `math`, `python`, `other`입니다. 다른 폴더를 추가하려면 `_config.yml`의 `defaults`, `_data/categories.yml`, `admin/config.yml`에도 해당 카테고리를 추가합니다.
 
 ## 브라우저에서 글 관리하기
 

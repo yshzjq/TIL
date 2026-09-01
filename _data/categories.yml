@@ -22,3 +22,8 @@
   slug: python
   icon: "🐍"
   description: Python 문법과 활용
+
+- name: 기타
+  slug: other
+  icon: "📚"
+  description: 그 밖의 주제와 학습 기록

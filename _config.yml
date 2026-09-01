@@ -50,3 +50,9 @@ defaults:
       layout: post
       category: Python
       til: true
+  - scope:
+      path: "other"
+    values:
+      layout: post
+      category: 기타
+      til: true

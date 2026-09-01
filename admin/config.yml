@@ -233,3 +233,45 @@ collections:
           ## 정리
 
           - 핵심 내용을 정리합니다.
+
+  - name: other
+    label: 기타
+    label_singular: 기타 글
+    description: 그 밖의 주제와 학습에 관한 기록
+    folder: /other
+    extension: md
+    format: yaml-frontmatter
+    create: true
+    delete: true
+    slug: "{{fields._slug}}"
+    summary: "{{title}} · {{date | date('YYYY.MM.DD')}}"
+    sortable_fields: [title, date]
+    fields:
+      - name: title
+        label: 제목
+        widget: string
+      - name: date
+        label: 작성일
+        widget: datetime
+        type: date
+        default: "{{now}}"
+      - name: updated
+        label: 수정일
+        widget: hidden
+        required: false
+      - name: description
+        label: 한 줄 설명
+        widget: text
+        hint: 홈과 검색 결과에 표시되는 짧은 설명입니다.
+      - name: body
+        label: 본문
+        widget: richtext
+        modes: [rich_text, raw]
+        default: |-
+          ## 오늘 배운 내용
+
+          내용을 작성합니다.
+
+          ## 정리
+
+          - 핵심 내용을 정리합니다.
