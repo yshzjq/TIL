@@ -1,7 +1,7 @@
 ---
 title: 2-3강 CPU/GPU device와 .to(device)
 date: 2026-08-20
-updated: 2026-08-20
+updated: 2026-09-01
 description: KANT 강의 '2-3강 CPU/GPU device와 .to(device)' 정리
 ---
 
@@ -9,7 +9,7 @@ description: KANT 강의 '2-3강 CPU/GPU device와 .to(device)' 정리
 
 `device`는 Tensor가 어디에 저장되어 있는지 나타낸다.
 
-대표적으로 다음 두 가지가 있습니다.
+대표적으로 다음 두 가지가 있다
 
 | device | 의미 |
 | --- | --- |
@@ -18,7 +18,7 @@ description: KANT 강의 '2-3강 CPU/GPU device와 .to(device)' 정리
 
 PyTorch Tensor는 기본적으로 CPU에 생성됩니다. GPU에서 연산하려면 Tensor를 명시적으로 이동해야 한다
 
-## 2. 현재 Tensor의 device 확인하기
+## 2. 현재 Tensor의 device 확인
 
 ```python
 import torch
@@ -28,9 +28,9 @@ x = torch.randn(2, 3)
 print(x.device)
 ```
 
-예상 출력
+출력
 
-```
+```plain
 cpu
 ```
 
@@ -38,7 +38,7 @@ Colab에서 GPU 런타임을 켰더라도, Tensor를 만들면 처음에는 보�
 
 GPU를 켰다는 것과 Tensor가 GPU에 올라갔다는 것은 다르다
 
-Colab GPU를 켰다고 해서 모든 Tensor가 자동으로 GPU로 이동하지 않습니다. 직접 .to(device)를 사용해야 한다
+Colab GPU를 켰다고 해서 모든 Tensor가 자동으로 GPU로 이동하지 않는다, 직접 .to(device)를 사용해야 한다
 
 ## 3. GPU 사용 가능 여부 확인하기
 
@@ -63,7 +63,7 @@ else:
 
 ## 4. device 변수 만들기
 
-실전 코드에서는 보통 다음 패턴을 사용합니다.
+실전에서는 다음 코드를 사용한다
 
 ```python
 import torch
@@ -77,7 +77,7 @@ print(device)
 
 ## 5. Tensor를 device로 이동하기
 
-Tensor는 `.to(device)`로 이동합니다.
+Tensor는 `.to(device)`로 이동한다
 
 ```python
 import torch
@@ -103,7 +103,7 @@ Tensor의 `.to(device)`는 이동된 Tensor를 반환하므로 반환값을 저�
 ```python
 x = torch.randn(2, 3)
 
-# 이렇게만 쓰면 반환된 Tensor를 저장하지 않습니다.
+# 이렇게만 쓰면 반환된 Tensor를 저장하지 않는다
 x.to(device)
 
 print(x.device)
@@ -144,14 +144,14 @@ print(output.device)
 
 예상 출력
 
-```
+```plain
 torch.Size([8, 2])
 cuda:0
 ```
 
 GPU가 없을 시
 
-```
+```plain
 torch.Size([8, 2])
 cpu
 ```
@@ -173,8 +173,8 @@ model = nn.Linear(4, 2).to(device)
 # 모델의 첫 번째 파라미터를 꺼내 device를 확인합니다.
 print(next(model.parameters()).device)
 ```
-## 8. device mismatch 오류 이해하기
 
+## 8. device mismatch 오류 이해하기
 
 모델은 GPU에 있고 입력 Tensor는 CPU에 있을때
 
@@ -201,9 +201,10 @@ else:
 
 오류 메시지
 
+```plain
+모델과 입력 Tensor가 서로 다른 device에 있다.
 ```
-모델과 입력 Tensor가 서로 다른 device에 있습니다.
-```
+
 device mismatch 오류 예시
 
 학습 루프에서 `images`는 GPU로 보냈는데 `labels`를 CPU에 둔 경우, 또는 모델은 GPU인데 새로 만든 Tensor가 CPU에 남아 있는 경우 자주 발생.
@@ -212,7 +213,7 @@ device mismatch 오류 예시
 
 앞으로 학습 루프를 만들 때는 다음 패턴을 거의 그대로 사용합니다.
 
-**[의사코드 — 독립 실행 대상 아님]** 아래의 `model`, `dataloader`, `criterion`은 실제 과제에서 앞 셀에 정의되어 있다고 가정합니다.
+**[의사코드 — 독립 실행 대상 아님]** 아래의 `model`, `dataloader`, `criterion`은 실제 과제에서 앞 셀에 정의되어 있다고 가정
 
 ```python
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -266,5 +267,5 @@ print(z.shape)
 print(z.dtype)
 print(z.device)
 ```
-`ones_like`, `rand_like` 같은 함수는 기존 Tensor의 shape, dtype, device를 유지
 
+`ones_like`, `rand_like` 같은 함수는 기존 Tensor의 shape, dtype, device를 유지
