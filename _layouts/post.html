@@ -35,5 +35,11 @@ layout: default
       <a class="button button-edit" href="{{ '/admin/' | relative_url }}#/collections/{{ editor_collection }}/entries/{{ page.name | remove: '.md' | uri_escape }}" rel="nofollow">수정</a>
       <a class="button button-secondary" href="{{ '/categories/' | relative_url }}#{{ page.category | slugify }}">다른 글 보기</a>
     </div>
+
+    {% assign all_til_pages = site.pages | where: "til", true | sort: "date" | reverse %}
+    {% assign category_til_pages = all_til_pages | where: "category", page.category %}
+    <section class="nearby-posts" aria-label="{{ page.category }} 게시글 목록">
+      {% include nearby-post-list.html posts=category_til_pages %}
+    </section>
   </footer>
 </article>

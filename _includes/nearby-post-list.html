@@ -1,0 +1,50 @@
+{% assign nearby_posts = include.posts %}
+{% assign nearby_count = nearby_posts | size %}
+{% assign current_index = 0 %}
+{% for nearby_post in nearby_posts %}
+  {% if nearby_post.url == page.url %}
+    {% assign current_index = forloop.index0 %}
+  {% endif %}
+{% endfor %}
+
+{% assign window_start = current_index | minus: 2 %}
+{% if window_start < 0 %}
+  {% assign window_start = 0 %}
+{% endif %}
+{% assign last_window_start = nearby_count | minus: 5 %}
+{% if last_window_start < 0 %}
+  {% assign last_window_start = 0 %}
+{% endif %}
+{% if window_start > last_window_start %}
+  {% assign window_start = last_window_start %}
+{% endif %}
+{% assign window_end = window_start | plus: 5 %}
+
+<ol class="nearby-posts-list">
+  {% for nearby_post in nearby_posts %}
+    {% if forloop.index0 >= window_start and forloop.index0 < window_end %}
+      {% assign is_current = false %}
+      {% if nearby_post.url == page.url %}
+        {% assign is_current = true %}
+      {% endif %}
+      <li class="nearby-post-item{% if is_current %} current{% endif %}">
+        {% if is_current %}
+          <span class="nearby-post-link" aria-current="page">
+        {% else %}
+          <a class="nearby-post-link" href="{{ nearby_post.url | relative_url }}">
+        {% endif %}
+            <span class="nearby-post-meta">
+              <span class="nearby-post-category">{{ nearby_post.category }}</span>
+              <time datetime="{{ nearby_post.date | date_to_xmlschema }}">{{ nearby_post.date | date: "%Y.%m.%d" }}</time>
+            </span>
+            <strong>{{ nearby_post.title }}</strong>
+            {% if is_current %}<span class="nearby-post-current">현재 글</span>{% endif %}
+        {% if is_current %}
+          </span>
+        {% else %}
+          </a>
+        {% endif %}
+      </li>
+    {% endif %}
+  {% endfor %}
+</ol>

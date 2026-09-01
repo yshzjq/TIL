@@ -580,6 +580,21 @@ a { color: inherit; text-decoration: none; }
 .article-footer { padding-top: 36px; border-top: 1px solid var(--line); text-align: center; }
 .article-footer-actions { display: flex; align-items: center; justify-content: center; gap: 12px; }
 
+.nearby-posts { margin-top: 58px; text-align: left; }
+.nearby-posts-list { overflow: hidden; margin: 0; padding: 0; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); list-style: none; }
+.nearby-post-item { border-bottom: 1px solid var(--line); }
+.nearby-post-item:last-child { border-bottom: 0; }
+.nearby-post-link { position: relative; display: grid; min-height: 82px; padding: 16px 106px 16px 18px; align-content: center; gap: 5px; transition: background .2s; }
+a.nearby-post-link:hover { background: #fafbff; }
+a.nearby-post-link:hover strong { color: var(--primary); }
+a.nearby-post-link:focus-visible { outline: 3px solid rgba(79, 70, 229, .2); outline-offset: -3px; }
+.nearby-post-link strong { overflow: hidden; font-size: 15px; line-height: 1.45; text-overflow: ellipsis; white-space: nowrap; transition: color .2s; }
+.nearby-post-meta { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 11px; font-variant-numeric: tabular-nums; }
+.nearby-post-category { color: var(--primary); font-weight: 750; }
+.nearby-post-item.current { background: var(--primary-soft); }
+.nearby-post-item.current .nearby-post-link strong { color: var(--primary-dark); }
+.nearby-post-current { position: absolute; top: 50%; right: 18px; padding: 5px 9px; border-radius: 999px; color: #fff; background: var(--primary); font-size: 10px; font-weight: 800; transform: translateY(-50%); }
+
 .guide-layout { display: grid; grid-template-columns: 250px 1fr; padding: 64px 0 100px; gap: 64px; }
 .guide-summary { position: sticky; top: 100px; height: fit-content; padding: 23px; border: 1px solid #c7d2fe; border-radius: 16px; background: var(--primary-soft); }
 .guide-summary ol { margin: 14px 0 0; padding-left: 20px; color: var(--muted); font-size: 14px; }
@@ -663,6 +678,9 @@ a { color: inherit; text-decoration: none; }
   .article-header h1 { font-size: 36px; }
   .article-body { font-size: 16px; }
   .article-footer-actions { flex-direction: column; }
+  .nearby-post-link { min-height: 78px; padding: 14px 78px 14px 15px; }
+  .nearby-post-link strong { white-space: normal; }
+  .nearby-post-current { right: 13px; }
   .guide-content section { padding-left: 42px; }
   .site-footer { align-items: start; flex-direction: column; gap: 18px; }
 }
