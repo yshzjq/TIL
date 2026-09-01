@@ -88,7 +88,9 @@ description: 분야별로 정리한 모든 TIL 기록입니다.
           {% for post in til_pages %}
             {% assign post_number = til_pages.size | minus: forloop.index0 %}
             {% assign modified_date = post.updated | default: post.date %}
-            <article class="category-board-row" data-category-row data-category="{{ post.category | slugify }}" data-created-date="{{ post.date | date: '%Y-%m-%d' }}" role="row">
+            {% assign post_category = site.data.categories | where: "name", post.category | first %}
+            {% assign post_category_slug = post_category.slug | default: post.category | slugify %}
+            <article class="category-board-row" data-category-row data-category="{{ post_category_slug }}" data-created-date="{{ post.date | date: '%Y-%m-%d' }}" role="row">
               <span class="category-board-number" data-post-number role="cell">{{ post_number }}</span>
               <div class="category-board-title-cell" role="cell">
                 <a class="category-board-title" href="{{ post.url | relative_url }}">

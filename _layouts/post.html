@@ -2,12 +2,15 @@
 layout: default
 ---
 
+{% assign category_data = site.data.categories | where: "name", page.category | first %}
+{% assign category_slug = category_data.slug | default: page.category | slugify %}
+
 <article class="article">
   <header class="article-header">
     <nav class="breadcrumb" aria-label="현재 위치">
       <a href="{{ '/' | relative_url }}">홈</a>
       <span aria-hidden="true">/</span>
-      <a href="{{ '/categories/' | relative_url }}#{{ page.category | slugify }}">{{ page.category }}</a>
+      <a href="{{ '/categories/' | relative_url }}#{{ category_slug }}">{{ page.category }}</a>
     </nav>
     <span class="category-label">{{ page.category }}</span>
     <h1>{{ page.title }}</h1>
@@ -31,9 +34,8 @@ layout: default
 
   <footer class="article-footer">
     <div class="article-footer-actions">
-      {% assign editor_collection = page.category | slugify %}
-      <a class="button button-edit" href="{{ '/admin/' | relative_url }}#/collections/{{ editor_collection }}/entries/{{ page.name | remove: '.md' | uri_escape }}" rel="nofollow">수정</a>
-      <a class="button button-secondary" href="{{ '/categories/' | relative_url }}#{{ page.category | slugify }}">다른 글 보기</a>
+      <a class="button button-edit" href="{{ '/admin/' | relative_url }}#/collections/{{ category_slug }}/entries/{{ page.name | remove: '.md' | uri_escape }}" rel="nofollow">수정</a>
+      <a class="button button-secondary" href="{{ '/categories/' | relative_url }}#{{ category_slug }}">다른 글 보기</a>
     </div>
 
     {% assign all_til_pages = site.pages | where: "til", true | sort: "date" | reverse %}
