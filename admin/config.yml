@@ -25,10 +25,52 @@ media_libraries:
 
 collections:
   - name: deep-learning
-    label: 딥러닝
-    label_singular: 딥러닝 글
-    description: 딥러닝 이론과 구현에 관한 기록
+    label: 딥러닝 기초
+    label_singular: 딥러닝 기초 글
+    description: 딥러닝 기본 이론과 구현에 관한 기록
     folder: /deep-learning
+    extension: md
+    format: yaml-frontmatter
+    create: true
+    delete: true
+    slug: "{{fields._slug}}"
+    summary: "{{title}} · {{date | date('YYYY.MM.DD')}}"
+    sortable_fields: [title, date]
+    fields:
+      - name: title
+        label: 제목
+        widget: string
+      - name: date
+        label: 작성일
+        widget: datetime
+        type: date
+        default: "{{now}}"
+      - name: updated
+        label: 수정일
+        widget: hidden
+        required: false
+      - name: description
+        label: 한 줄 설명
+        widget: text
+        hint: 홈과 검색 결과에 표시되는 짧은 설명입니다.
+      - name: body
+        label: 본문
+        widget: richtext
+        modes: [rich_text, raw]
+        default: |-
+          ## 오늘 배운 내용
+
+          내용을 작성합니다.
+
+          ## 정리
+
+          - 핵심 내용을 정리합니다.
+
+  - name: deep-learning-advanced
+    label: 딥러닝 심화
+    label_singular: 딥러닝 심화 글
+    description: 딥러닝 심화 이론과 구현에 관한 기록
+    folder: /deep-learning-advanced
     extension: md
     format: yaml-frontmatter
     create: true

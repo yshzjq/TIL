@@ -29,7 +29,13 @@ defaults:
       path: "deep-learning"
     values:
       layout: post
-      category: Deep Learning
+      category: 딥러닝 기초
+      til: true
+  - scope:
+      path: "deep-learning-advanced"
+    values:
+      layout: post
+      category: 딥러닝 심화
       til: true
   - scope:
       path: "math"

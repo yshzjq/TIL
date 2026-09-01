@@ -3,10 +3,15 @@
   icon: "🤖"
   description: 머신러닝 개념과 구현
 
-- name: Deep Learning
+- name: 딥러닝 기초
   slug: deep-learning
   icon: "🧠"
-  description: 딥러닝 이론과 구현
+  description: 딥러닝의 기본 이론과 구현
+
+- name: 딥러닝 심화
+  slug: deep-learning-advanced
+  icon: "🚀"
+  description: 딥러닝 심화 이론과 구현
 
 - name: Math
   slug: math
