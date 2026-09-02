@@ -1,13 +1,13 @@
 ---
 title: 3-2강 MLP의 입력층,은닉층,출력층
 date: 2026-08-20
-updated: 2026-08-24
+updated: 2026-09-02
 description: KANT 강의 '3-2강 MLP의 입력층,은닉층,출력층' 정리
 ---
 
 ## 1. 이번에 배울것
 
-퍼셉트론을 여러 개 묶어 **층(layer)** 을 만들고, 그 층을 여러 개 쌓아 MLP를 만듭니다.
+퍼셉트론을 여러 개 묶어 **층(layer)** 을 만들고, 그 층을 여러 개 쌓아 MLP를 만든다
 
 <img src="{{ '/assets/images/uploads/deep-learning/MLP 전체 구조.png' | relative_url }}" alt="MLP 전체 구조.png" loading="lazy">
 
@@ -15,7 +15,7 @@ description: KANT 강의 '3-2강 MLP의 입력층,은닉층,출력층' 정리
 
 ## 2. MLP란 무엇인가요?
 
-MLP는 **Multi-Layer Perceptron**의 줄임말입니다. 한국어로는 다층 퍼셉트론이라고 부른다
+MLP는 **Multi-Layer Perceptron**의 줄임말이다. 한국어로는 다층 퍼셉트론이라고 부른다
 
 이름 그대로 여러 층을 가진 퍼셉트론 구조
 
@@ -28,7 +28,7 @@ MLP                  -> 입력을 여러 단계로 변환해 출력 생성
 
 MLP의 핵심은 입력 데이터를 바로 정답으로 바꾸는 것이 아니라, 중간에 **은닉층(hidden layer)** 을 통해 더 유용한 표현으로 바꾸는 것
 
-은닉층은 원본 feature를 모델이 이해하기 좋은 중간 feature로 바꾸는 공간이라고 생각하면 좋다. 사람으로 비유하면 원본 정보를 바로 판단하지 않고, 중간 메모를 만들고 그 메모를 바탕으로 판단하는 것과 비슷하다
+은닉층은 원본 feature를 모델이 이해하기 좋은 중간 feature로 바꾸는 공간이라고 생각하면 좋다.<br> 사람으로 비유하면 원본 정보를 바로 판단하지 않고, 중간 메모를 만들고 그 메모를 바탕으로 판단하는 것과 비슷하다
 
 ## 3. 입력층, 은닉층, 출력층 역할
 
@@ -36,9 +36,9 @@ MLP는 보통 세 종류의 층으로 설명.
 
 | 층 | 역할 | 예시 shape |
 | --- | --- | --- |
-| 입력층 | 원본 데이터를 받습니다. | `(batch_size, input_dim)` |
-| 은닉층 | 입력을 새로운 표현으로 변환합니다. | `(batch_size, hidden_dim)` |
-| 출력층 | 최종 예측 점수 또는 logits를 만듭니다. | `(batch_size, num_classes)` |
+| 입력층 | 원본 데이터를 받는다 | `(batch_size, input_dim)` |
+| 은닉층 | 입력을 새로운 표현으로 변환한다 | `(batch_size, hidden_dim)` |
+| 출력층 | 최종 예측 점수 또는 logits를 만든다 | `(batch_size, num_classes)` |
 
 예를 들어 학생 4명의 데이터를 가지고 3개 feature로 2개 클래스를 분류한다고 가정
 
@@ -110,7 +110,7 @@ print("logits shape:", logits.shape)
 print(logits)
 ```
 
-예상 출력
+출력
 
 ```plain
 X shape     : torch.Size([4, 3])
