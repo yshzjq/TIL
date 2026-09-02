@@ -1,7 +1,7 @@
 ---
 title: 2-1강 NLP 데이터 구조와 Token·Subword
 date: 2026-09-01
-updated: 2026-09-01
+updated: 2026-09-02
 description: KANT 강의 '2-1강 NLP 데이터 구조와 Token·Subword' 정리
 ---
 
@@ -69,4 +69,88 @@ ID 숫자 자체에는 보편적 의미가 없다. <br>
 | Character | 작은 어휘로 거의 모든 문자열 표현 | sequence가 길어지고 의미 단위가 잘게 깨짐 |
 | Subword | 재사용되는 조각으로 OOV와 길이의 균형 | 분할이 직관적 단어 경계와 다를 수 있음 |
 
-`인공지능연구소`가 하나의 word token으로 없더라도 `인공`, `##지능`, `연구`, `##소`처럼 기존 조각을 조합할 수 있다. 실제 분할 표시는 WordPiece, BPE, SentencePiece 구현마다 다릅니다.
+`인공지능연구소`가 하나의 word token으로 없더라도 `인공`, `##지능`, `연구`, `##소`처럼 기존 조각을 조합할 수 있다. 실제 분할 표시는 WordPiece, BPE, SentencePiece 구현마다 다르다
+
+```
+문자열 → tokenizer의 정규화·pre-tokenization·subword 알고리즘
+      → token 문자열 → vocabulary lookup → input_ids
+```
+
+## 4. Vocabulary 크기와 sequence 길이의 trade-off
+
+Vocabulary를 키우면 자주 쓰는 긴 문자열을 하나의 token으로 담아 길이가 짧아질 수 있지만 embedding·LM head 파라미터가 늘어난다<br> 
+Vocabulary를 줄이면 희귀 문자열을 더 작은 조각으로 표현해 sequence가 길어질 수 있다.
+
+Vocabulary 크기는 token 수에 영향을 주지만, <br>
+실제 분할 결과는 Tokenizer의 분할 방식, 학습에 사용한 데이터, 문자열 정규화 규칙에도 영향을 받기 때문에 Vocabulary 크기만으로 <br>
+Tokenizer의 성능이나 sequence 길이를 판단할 수 없다.
+
+Vocabulary를 키우면 자주 쓰는 긴 문자열을 하나의 token으로 담을 수 있어 sequence 길이가 짧아질 수 있다.<br>
+반면 저장하고 구분해야 하는 token 종류가 많아지므로 모델의 메모리 부담도 커질 수 있다.
+
+
+## 5. Special token은 모델 입력의 구조를 표시
+
+| Token 역할 | 대표 표기 | 용도 |
+| --- | --- | --- |
+| Padding | `[PAD]` | batch 길이 맞춤 |
+| Unknown | `[UNK]` | 표현하지 못한 문자열 |
+| Classification/Beginning | `[CLS]`, `<s>` | 문장 대표 또는 시작 |
+| Separator/End | `[SEP]`, `</s>` | 문장 경계 또는 끝 |
+| Mask | `[MASK]` | Masked LM 학습·추론 |
+
+모든 모델이 같은 표기와 역할을 쓰지 않는다.<br>
+Token ID를 하드코딩하지 말고 `tokenizer.pad_token_id`, `tokenizer.mask_token`처럼 객체에서 읽는다
+
+## 6. 데이터 누수와 중복
+
+같은 기사 제목이 train과 test에 동시에 있으면 모델이 일반화한 것이 아니라 본 문장을 기억했을 수 있다. <br>
+다음 항목을 tokenization 전에 확인
+
+1. ID 유일성
+2. 텍스트 정규화 후 중복
+3. label 집합과 `label2id`
+4. 클래스 분포
+5. 출처·시간 단위 split 필요성
+6. 개인정보·라이선스·민감 정보
+
+## 7. 출력 예시를 읽는 방법
+
+Toy tokenizer가 다음 결과를 냈다고 가정한다
+
+```
+text: 인공지능연구소 출범
+tokens: [CLS], 인공, ##지능, 연구, ##소, 출범, [SEP]
+ids:    2,     4102, 7821, 991,   441,  7300, 3
+```
+
+*계약(contract)**은 “이 데이터가 어떤 규칙과 형식을 지켜야 하는가”
+
+여기서 확인할 것은 특정 ID 숫자가 아니라 계약이다.<br>
+Token 7개와 ID 7개가 1:1로 대응하고, `##`는 앞 조각에 이어지는 subword임을 표시하며, 문장 경계 special token이 앞뒤에 추가되었다.<br>
+숫자 ID는 예시일 뿐 실제 KoELECTRA vocabulary에서 다시 조회해야 한다.
+
+## 8. 실무 판단: label과 token 계약을 분리
+
+`label2id`는 프로젝트 task의 계약이고 token ID는 tokenizer checkpoint의 계약입니다. 둘 다 정수지만 섞어 해석하면 안 됩니다.
+
+```python
+# label ID는 task가 정하는 별도 namespace입니다.
+label2id = {"economy": 0, "sports": 1, "tech": 2}
+id2label = {value: key for key, value in label2id.items()}  # 예측 ID를 이름으로 복원
+
+# 서로 다른 label이 같은 ID를 공유하지 않는지, 왕복 변환이 되는지 검사합니다.
+assert len(label2id) == len(set(label2id.values()))
+assert all(id2label[label2id[name]] == name for name in label2id)
+```
+
+모델 예측의 `0`은 economy label을 뜻할 수 있지만 tokenizer `input_ids`의 `0`은 PAD 같은 전혀 다른 token을 뜻할 수 있다.<br>
+어느 namespace의 ID인지 변수명과 표 제목에 명시한다
+
+## 오류·주의사항
+
+- “token=단어”라고 고정하지 않는다
+- `len(text)`는 문자 수이지 token 수가 아니다.
+- `[UNK]`가 적다고 무조건 좋은 tokenizer는 아니다. 길이·언어 범위·모델 호환성을 함께 봐야한다
+- 원문 label 문자열과 학습용 정수 ID의 매핑을 양방향으로 저장한다.
+
