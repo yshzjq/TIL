@@ -5,7 +5,7 @@ description: 분야별로 정리한 모든 TIL 기록입니다.
 ---
 
 {% assign til_pages = site.pages | where: "til", true | sort: "date" | reverse %}
-{% assign date_groups = til_pages | group_by_exp: "post", "post.date | date: '%Y-%m-%d'" %}
+{% assign month_groups = til_pages | group_by_exp: "post", "post.date | date: '%Y-%m'" %}
 
 <header class="page-header">
   <p class="eyebrow">ALL NOTES</p>
@@ -36,18 +36,30 @@ description: 분야별로 정리한 모든 TIL 기록입니다.
       {% endfor %}
     </div>
 
-    {% if date_groups.size > 0 %}
+    {% if month_groups.size > 0 %}
       <div class="category-sidebar-heading category-date-heading">
         <h2 id="date-filter-title">작성일</h2>
       </div>
 
-      <div class="category-filter-list category-date-list" aria-labelledby="date-filter-title">
-        {% for date_group in date_groups %}
-          <button class="category-filter-button" type="button" data-date-filter="{{ date_group.name }}" data-date-filter-button aria-controls="category-posts" aria-pressed="false">
-            <span class="category-filter-icon" aria-hidden="true">📅</span>
-            <span class="category-filter-name">{{ date_group.name | date: "%Y.%m.%d" }}</span>
-            <span class="category-filter-count">{{ date_group.items | size }}</span>
-          </button>
+      <div class="category-date-list" aria-labelledby="date-filter-title">
+        {% for month_group in month_groups %}
+          {% assign date_groups = month_group.items | group_by_exp: "post", "post.date | date: '%Y-%m-%d'" %}
+          <details class="category-month-group" data-month-group>
+            <summary class="category-month-summary">
+              <span class="category-month-chevron" aria-hidden="true">›</span>
+              <span class="category-month-name">{{ month_group.name | date: "%y.%m" }}</span>
+              <span class="category-filter-count">{{ month_group.items | size }}</span>
+            </summary>
+            <div class="category-filter-list category-day-list">
+              {% for date_group in date_groups %}
+                <button class="category-filter-button" type="button" data-date-filter="{{ date_group.name }}" data-date-filter-button aria-controls="category-posts" aria-pressed="false">
+                  <span class="category-filter-icon" aria-hidden="true">📅</span>
+                  <span class="category-filter-name">{{ date_group.name | date: "%y.%m.%d" }}</span>
+                  <span class="category-filter-count">{{ date_group.items | size }}</span>
+                </button>
+              {% endfor %}
+            </div>
+          </details>
         {% endfor %}
       </div>
     {% endif %}

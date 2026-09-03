@@ -122,16 +122,19 @@
   const activateDate = (date, updateUrl = false) => {
     const visibleRows = rows.filter((row) => row.dataset.createdDate === date);
     const formattedDate = date.replaceAll("-", ".");
+    const activeDateButton = dateButtons.find((button) => button.dataset.dateFilter === date);
 
     categoryButtons.forEach((button) => {
       button.classList.remove("active");
       button.setAttribute("aria-pressed", "false");
     });
     dateButtons.forEach((button) => {
-      const isActive = button.dataset.dateFilter === date;
+      const isActive = button === activeDateButton;
       button.classList.toggle("active", isActive);
       button.setAttribute("aria-pressed", String(isActive));
     });
+    const activeMonthGroup = activeDateButton?.closest("[data-month-group]");
+    if (activeMonthGroup) activeMonthGroup.open = true;
 
     showRows(visibleRows, `${formattedDate} 작성 게시글`, `${formattedDate}에 작성한 배움 기록`);
 
