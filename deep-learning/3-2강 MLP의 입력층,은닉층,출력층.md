@@ -1,7 +1,7 @@
 ---
 title: 3-2강 MLP의 입력층,은닉층,출력층
 date: 2026-08-20
-updated: 2026-09-02
+updated: 2026-09-04
 description: KANT 강의 '3-2강 MLP의 입력층,은닉층,출력층' 정리
 ---
 
@@ -257,7 +257,7 @@ for name, param in model.named_parameters():
     print(name, param.shape, "numel=", param.numel())
 ```
 
-예상 출력
+출력
 
 ```plain
 total parameters: 32
