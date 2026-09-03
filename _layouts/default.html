@@ -10,6 +10,13 @@
     {% assign asset_version = site.github.build_revision | default: '2' %}
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}?v={{ asset_version }}">
     {% if page.math %}
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: {'[+]': [['$', '$']]}
+        }
+      };
+    </script>
     <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     {% endif %}
   </head>
