@@ -8,14 +8,14 @@ description: KANT 강의 '6-5강 Model·Tokenizer 저장 재로드와 추론 재
 ## 1. 저장해야 하는 산출물
 
 
-<img src="{{ '/assets/images/uploads\deep-learning-advanced\01_save_reload_cycle
+<img src="{{ '/assets/images/uploads\deep-learning-advanced\01_save_reload_cycle.png
 ' | relative_url }}" alt="01_save_reload_cycle
 " loading="lazy">
 
 
 저장·재로드 흐름
 
-<img src="{{ '/assets/images/uploads\deep-learning-advanced\02_artifact_directory
+<img src="{{ '/assets/images/uploads\deep-learning-advanced\02_artifact_directory.png
 ' | relative_url }}" alt="02_artifact_directory
 " loading="lazy">
 
