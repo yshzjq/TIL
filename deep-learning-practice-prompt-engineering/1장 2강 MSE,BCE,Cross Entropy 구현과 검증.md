@@ -201,7 +201,7 @@ print(np.log(0.0))  # -inf와 경고가 발생할 수 있습니다.
 
 BCE 곡선의 직관
 
-<img src="{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/02_bce_curve.png' | relative_url }" alt="02_bce_curve.png" loading="lazy">
+<img src="{{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/02_bce_curve.png' | relative_url }}" alt="02_bce_curve.png" loading="lazy">
 
 실무 프레임워크에서는 보통 확률이 아니라 **logits를 직접 받는 BCEWithLogitsLoss**를 사용한다.
 
@@ -309,7 +309,7 @@ print("mean loss:", sample_losses.mean())
 
 Cross Entropy를 수동으로 계산하는 흐름
 
-<img src="{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/02_ce_manual_steps.png' | relative_url }" alt="02_ce_manual_steps.png" loading="lazy">
+<img src="{{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/02_ce_manual_steps.png' | relative_url }}" alt="02_ce_manual_steps.png" loading="lazy">
 
 정답 클래스의 확률이 높을수록 정답 클래스 log-probability는 0에 가까워지고, loss도 작아진다
 
@@ -340,7 +340,7 @@ one-hot label은 클래스마다 0과 1을 적은 벡터이고, class index는 �
 
 Cross Entropy 수동 계산 단계
 
-<img src="{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/02_ce_manual_steps.png' | relative_url }" alt="02_ce_manual_steps.png" loading="lazy">
+<img src="{{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/02_ce_manual_steps.png' | relative_url }}" alt="02_ce_manual_steps.png" loading="lazy">
 
 ## 7. 샘플별 loss와 배치 reduction
 
@@ -363,7 +363,7 @@ print("sum:", sample_losses.sum())
 
 reduction 방식과 shape
 
-<img src="{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/02_reduction_shapes.png' | relative_url }" alt="02_reduction_shapes.png" loading="lazy">
+<img src="{{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/02_reduction_shapes.png' | relative_url }}" alt="02_reduction_shapes.png" loading="lazy">
 
 - `none`: 샘플별 loss를 그대로 유지한다
 - `mean`: 평균 하나로 줄인다

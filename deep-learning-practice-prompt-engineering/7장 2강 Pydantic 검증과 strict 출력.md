@@ -48,7 +48,7 @@ Python 타입 정의
 
 Pydantic 검증 흐름
 
-<img src="{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/05_pydantic_validation.png' | relative_url }" alt="05_pydantic_validation.png" loading="lazy">
+<img src="{{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/05_pydantic_validation.png' | relative_url }}" alt="05_pydantic_validation.png" loading="lazy">
 
 ## 2. Pydantic 검증의 큰 그림
 
@@ -70,7 +70,7 @@ OpenAI Python SDK의 `responses.parse()`는 Pydantic 모델을 `text_format`으�
 
 Responses parse 흐름
 
-<img src="{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/07_responses_parse.png' | relative_url }" alt="07_responses_parse.png" loading="lazy">
+<img src="{{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/07_responses_parse.png' | relative_url }}" alt="07_responses_parse.png" loading="lazy">
 
 구조화 출력에서 구분해야 할 세 경계가 있다
 
@@ -219,7 +219,7 @@ LLM 출력의 자료형 오류를 그대로 발견하고 싶을 때는 주의해
 
 일반 검증과 strict 검증
 
-<img src="{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/06_strict_coercion.png' | relative_url }" alt="06_strict_coercion.png" loading="lazy">
+<img src="{{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/06_strict_coercion.png' | relative_url }}" alt="06_strict_coercion.png" loading="lazy">
 
 ### StrictInt 사용하기
 

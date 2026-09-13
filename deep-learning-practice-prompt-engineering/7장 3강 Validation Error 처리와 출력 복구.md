@@ -19,7 +19,7 @@ description: KANT 강의 '7장 3강 Validation Error 처리와 출력 복구' �
 
 Validation 복구 흐름
 
-<img src="{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/08_validation_recovery.png' | relative_url }" alt="08_validation_recovery.png" loading="lazy">
+<img src="{{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/08_validation_recovery.png' | relative_url }}" alt="08_validation_recovery.png" loading="lazy">
 
 복구 결과는 다음 중 하나가 될 수 있다.
 
@@ -119,7 +119,7 @@ JSON 문법은 맞지만 Pydantic 규칙을 어긴다
 
 구조 검증과 업무 검증의 경계
 
-<img src="{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/05_pydantic_validation.png' | relative_url }" alt="05_pydantic_validation.png" loading="lazy">
+<img src="{{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/05_pydantic_validation.png' | relative_url }}" alt="05_pydantic_validation.png" loading="lazy">
 
 ## 4. ValidationError 읽기
 

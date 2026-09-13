@@ -362,7 +362,7 @@ plt.title("Training loss")
 plt.show()
 ```
 
-<img src="{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/Training_Loss_Value.png' | relative_url }" alt="Training_Loss_Value.png" loading="lazy">
+<img src="{{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/Training_Loss_Value.png' | relative_url }}" alt="Training_Loss_Value.png" loading="lazy">
 
 learning rate는 한 step의 이동 크기입니다.
 
@@ -372,7 +372,7 @@ learning rate는 한 step의 이동 크기입니다.
 
 learning rate에 따른 이동 경로
 
-<img src="{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/01_learning_rate_paths.png' | relative_url }" alt="01_learning_rate_paths.png" loading="lazy">
+<img src="{{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/01_learning_rate_paths.png' | relative_url }}" alt="01_learning_rate_paths.png" loading="lazy">
 
 ```python
 # [실습 목적] loss curve를 확인합니다에서 설명한 흐름을 코드로 확인합니다.
@@ -436,7 +436,7 @@ plt.show()
 학습률별 loss curve
 
 
-<img src="{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/01_lr_curves.png' | relative_url }" alt="01_lr_curves.png" loading="lazy">
+<img src="{{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/01_lr_curves.png' | relative_url }}" alt="01_lr_curves.png" loading="lazy">
 
 
 

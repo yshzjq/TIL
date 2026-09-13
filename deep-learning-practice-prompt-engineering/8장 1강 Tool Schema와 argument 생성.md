@@ -39,7 +39,7 @@ Function Calling은 모델이 애플리케이션에 등록된 도구 중 어떤 
 
 Tool Schema 구성요소
 
-<img src="{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/02_tool_schema_parts.png' | relative_url }" alt="02_tool_schema_parts.png" loading="lazy">
+<img src="{{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/02_tool_schema_parts.png' | relative_url }}" alt="02_tool_schema_parts.png" loading="lazy">
 
 ## 2. Tool Calling의 다섯 단계
 
@@ -47,7 +47,7 @@ Function Calling은 다음 다섯 단계로 진행된다
 
 Tool Calling 다섯 단계
 
-<img src="{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/01_tool_calling_five_steps.png' | relative_url }" alt="01_tool_calling_five_steps.png" loading="lazy">
+<img src="{{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/01_tool_calling_five_steps.png' | relative_url }}" alt="01_tool_calling_five_steps.png" loading="lazy">
 
 1. 애플리케이션이 사용 가능한 Tool Schema를 모델에 전달한다
 2. 모델이 사용자 요청을 보고 `function_call` item을 생성한다
@@ -82,7 +82,7 @@ client-executed function은 모델이 "무엇을 호출할지" 정하고, 네 �
 
 Tool Calling의 실행 경계
 
-<img src="{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/09_execution_boundary.png' | relative_url }" alt="09_execution_boundary.png" loading="lazy">
+<img src="{{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/09_execution_boundary.png' | relative_url }}" alt="09_execution_boundary.png" loading="lazy">
 
 Tool Calling의 핵심은 **모델과 애플리케이션의 책임을 분리하는 것**이다
 
@@ -167,7 +167,7 @@ Tool Schema는 단순 API 문서가 아니라 모델의 도구 선택 설명서�
 
 Strict Tool Schema 체크리스트
 
-<img src="{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/10_strict_schema_checklist.png' | relative_url }" alt="10_strict_schema_checklist.png" loading="lazy">
+<img src="{{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/10_strict_schema_checklist.png' | relative_url }}" alt="10_strict_schema_checklist.png" loading="lazy">
 
 Strict mode에서는 객체마다 `additionalProperties: false`가 필요하며,
 <br>
@@ -186,7 +186,7 @@ strict mode에서 기억할 핵심 규칙은 두 가지다
 모델 arguments와 검증 경계
 
 
-<img src="{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/03_argument_boundary.png' | relative_url }" alt="03_argument_boundary.png" loading="lazy">
+<img src="{{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/03_argument_boundary.png' | relative_url }}" alt="03_argument_boundary.png" loading="lazy">
 
 ### 선택값 표현하기
 
@@ -283,7 +283,7 @@ response = client.responses.create(
 
 function_call item 해부하기
 
-<img src="{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/function_call_item.png' | relative_url }" alt="function_call_item.png" loading="lazy">
+<img src="{{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/function_call_item.png' | relative_url }}" alt="function_call_item.png" loading="lazy">
 
 `function_call` item을 읽을 때는 다음 네 필드를 구분
 

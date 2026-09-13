@@ -55,7 +55,7 @@ JSON Schema는 이 질문을 기계가 검사할 수 있는 형태로 적는다
 
 Structured Output 전체 흐름
 
-<img src="{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/01_structured_output_flow.png' | relative_url }" alt="01_structured_output_flow.png" loading="lazy">
+<img src="{{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/01_structured_output_flow.png' | relative_url }}" alt="01_structured_output_flow.png" loading="lazy">
 
 JSON Schema는 모델을 더 똑똑하게 만드는 수식이 아니다
 
@@ -145,7 +145,7 @@ Invalid = 형식이나 규칙이 틀리다<br>
 Valid JSON = JSON 문법이 맞다<br>
 Invalid JSON = JSON 문법이 틀리다<br>
 
-<img src="{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/03_valid_invalid_json.png' | relative_url }" alt="03_valid_invalid_json.png" loading="lazy">
+<img src="{{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/03_valid_invalid_json.png' | relative_url }}" alt="03_valid_invalid_json.png" loading="lazy">
 
 ```
 JSON 문법이 맞다
@@ -167,7 +167,7 @@ JSON 문법이 맞다
 
 JSON Schema 핵심 키워드
 
-<img src="{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/02_json_schema_keywords.png' | relative_url }" alt="02_json_schema_keywords.png" loading="lazy">
+<img src="{{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/02_json_schema_keywords.png' | relative_url }}" alt="02_json_schema_keywords.png" loading="lazy">
 
 ### `type`
 
@@ -330,7 +330,7 @@ Structured Output이나 JSON Schema를 사용하면<br>
 
 중첩 Schema 구조
 
-<img src="{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/04_nested_schema.png' | relative_url }" alt="04_nested_schema.png" loading="lazy">
+<img src="{{ '/assets/images/uploads/deep-learning-practice-prompt-engineering/04_nested_schema.png' | relative_url }}" alt="04_nested_schema.png" loading="lazy">
 
 중첩 Schema에서는 각 객체마다 `properties`, `required`, `additionalProperties`를 별도로 생각해야 한다
 
