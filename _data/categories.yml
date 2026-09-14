@@ -28,6 +28,11 @@
   icon: "🐍"
   description: Python 문법과 활용
 
+- name: Project
+  slug: project
+  icon: "🗂️"
+  description: 프로젝트 진행 과정과 구현 기록
+
 - name: 기타
   slug: other
   icon: "📚"
