@@ -1,0 +1,36 @@
+---
+title: "KANT_프로젝트_1차(1일차)"
+date: 2026-09-14
+description: LLM 교육 안내 도우미의 주제를 정하고, 후보 모델 탐색과 Slack 자료 기반 답변 구현을 진행했다.
+---
+
+# KANT_프로젝트_1차(1일차)
+
+첫날에는 **LLM 교육 수강생을 위한 안내 도우미**를 만들기로 방향을 정했다. Slack에 흩어진 교육 공지와 자료를 바탕으로 질문에 답하는 것을 목표로, 모델 후보를 찾고 Python으로 연결하는 작업을 진행했다.
+
+## 단계별 진행 상황
+
+1. **[STEP 1. 문제 정의](https://app.notion.com/p/STEP-1-cc42dc3ef5148299bdbb81e66e1d3785?pvs=21) — 완료**  
+   운영 안내, 문서 정리, 코드 정리 중 어떤 주제를 선택할지 고민했다. 사용자를 나와 비슷한 LLM 교육 수강생으로 좁히면서, 최종 주제를 ‘LLM 교육에 대한 안내’로 정했다.
+
+2. **[STEP 2. 모델 요구사항 정의](https://app.notion.com/p/STEP2-3db2dc3ef514800f9da1ea2a56a7ab5d?pvs=21) — 진행 중**  
+   한국어로 답변하고 노트북에서 실행할 수 있는 모델을 기준으로 초안을 작성했다. 컨텍스트 길이와 GPU·VRAM 및 CPU/GPU 적재 상태는 추가 확인이 필요하며, 요구사항은 STEP 5에서 구체화할 예정이다.
+
+3. **[STEP 3. 후보 모델 탐색](https://app.notion.com/p/STEP-3-3db2dc3ef514802597cae7f3cc2550bc?pvs=21) — 완료**  
+   Ollama에서 실행할 수 있고 한국어와 지시 수행에 적합한 모델을 중심으로 탐색했다. 후보는 `qwen3:4b-instruct-2507-q4_K_M`과 `exaone3.5:7.8b`로 좁혔다. 현재 코드는 Qwen3를 사용하며, 최종 모델 선정은 평가 후 결정할 예정이다.
+
+4. **[STEP 4. 모델 실행 환경 확인과 Python 연결](https://app.notion.com/p/STEP-4-Python-3db2dc3ef514807a80f4fa65b28b1ed9?pvs=21) — 진행 중**  
+   Python과 Ollama 실행 준비를 마치고 모델 호출 코드를 구성했다. 프롬프트를 설계하는 과정에서 답변이 기대만큼 만족스럽지 않아, 근거를 전달하는 방식과 답변 규칙을 다듬고 있다.
+
+5. **[STEP 5. 평가 질문과 품질 기준 확정](https://app.notion.com/p/STEP-5-3db2dc3ef514803f950ffb594dea3a46?pvs=21) — 시작 전**  
+   어떤 질문으로 모델을 평가할지 고민 중이다. 평가 질문과 품질 기준은 아직 확정하지 않았다.
+
+
+## 오늘 구현한 내용
+
+[GitHub의 메인 코드](https://github.com/yshzjq/KANT_Project1/blob/main/project1-python-start/main_ollama_chat.py)에는 **Slack 데이터 갱신 → 질문에서 검색어 추출 → 관련 원글·답글 검색 → 입력 길이에 맞는 자료 선택 → 답변 생성** 흐름을 구성했다.
+
+답변에는 관련 자료 링크와 근거 메시지 식별값을 남기도록 했다. 특히 ‘참여 링크가 올라왔다’는 사실을 ‘강의가 실제로 진행됐다’는 의미로 해석하지 않도록 규칙을 넣고, 자료에 없는 사실이나 URL을 만들지 않도록 프롬프트를 보완했다.
+
+[응답 시간 측정 코드](https://github.com/yshzjq/KANT_Project1/blob/main/project1-python-start/03_measure_time.py)는 질문을 보낸 뒤 전체 답변을 받기까지 걸린 시간을 측정한다. 첫 토큰이 나오는 시간(TTFT)과는 다른 지표이므로, 이후 성능 비교에서 구분해야 한다.
+
