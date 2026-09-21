@@ -458,6 +458,14 @@ a { color: inherit; text-decoration: none; }
 .category-date-list .category-filter-name { overflow: visible; text-overflow: clip; }
 .category-filter-count { display: grid; min-width: 25px; height: 25px; padding: 0 7px; place-items: center; border-radius: 999px; color: var(--muted); background: var(--surface-soft); font-size: 11px; font-weight: 800; }
 .category-filter-button.active .category-filter-count { color: #fff; background: var(--primary); }
+.category-topic-group { overflow: hidden; border: 1px solid var(--line); border-radius: 12px; background: rgba(255, 255, 255, .55); }
+.category-topic-summary { display: grid; min-height: 49px; padding: 7px 10px; grid-template-columns: 22px 31px minmax(0, 1fr) auto; gap: 7px; align-items: center; color: var(--ink); cursor: pointer; list-style: none; }
+.category-topic-summary::-webkit-details-marker { display: none; }
+.category-topic-summary:hover { background: var(--surface-soft); }
+.category-topic-summary:focus-visible { outline: 3px solid rgba(79, 70, 229, .2); outline-offset: -3px; }
+.category-topic-group[open] .category-topic-summary .category-month-chevron { transform: rotate(90deg); }
+.category-topic-list { display: grid; padding: 0 7px 7px 25px; gap: 7px; }
+.category-topic-list .category-filter-button { background: var(--surface); }
 
 .category-results { min-width: 0; }
 .category-results-heading { display: flex; min-height: 95px; margin-bottom: 22px; align-items: end; justify-content: space-between; gap: 24px; }

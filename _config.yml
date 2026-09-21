@@ -69,6 +69,12 @@ defaults:
       category: Project
       til: true
   - scope:
+      path: "personal-study/deep-learning-pytorch-textbook"
+    values:
+      layout: post
+      category: "딥 러닝 파이토치 교과서 - 입문부터 LLM 파인튜닝까지"
+      til: true
+  - scope:
       path: "other"
     values:
       layout: post

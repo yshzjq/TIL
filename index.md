@@ -32,16 +32,35 @@ description: 매일 배운 내용을 차곡차곡 기록하는 개발 학습 노
 
   <div class="category-grid">
     {% for item in site.data.categories %}
-      {% assign category_posts = til_pages | where: "category", item.name %}
-      <a class="category-card" href="{{ '/categories/' | relative_url }}#{{ item.slug }}">
-        <span class="category-icon" aria-hidden="true">{{ item.icon }}</span>
-        <span class="category-info">
-          <strong>{{ item.name }}</strong>
-          <small>{{ item.description }}</small>
-        </span>
-        <span class="category-count">{{ category_posts | size }}</span>
-      </a>
+      {% unless item.group %}
+        {% assign category_posts = til_pages | where: "category", item.name %}
+        <a class="category-card" href="{{ '/categories/' | relative_url }}#{{ item.slug }}">
+          <span class="category-icon" aria-hidden="true">{{ item.icon }}</span>
+          <span class="category-info">
+            <strong>{{ item.name }}</strong>
+            <small>{{ item.description }}</small>
+          </span>
+          <span class="category-count">{{ category_posts | size }}</span>
+        </a>
+      {% endunless %}
     {% endfor %}
+
+    {% assign personal_study_items = site.data.categories | where: "group", "개인공부" %}
+    {% if personal_study_items.size > 0 %}
+      {% assign personal_study_count = 0 %}
+      {% for item in personal_study_items %}
+        {% assign item_posts = til_pages | where: "category", item.name %}
+        {% assign personal_study_count = personal_study_count | plus: item_posts.size %}
+      {% endfor %}
+      <a class="category-card" href="{{ '/categories/' | relative_url }}">
+        <span class="category-icon" aria-hidden="true">📚</span>
+        <span class="category-info">
+          <strong>개인공부</strong>
+          <small>{{ personal_study_items | map: "name" | join: " · " }}</small>
+        </span>
+        <span class="category-count">{{ personal_study_count }}</span>
+      </a>
+    {% endif %}
   </div>
 </section>
 

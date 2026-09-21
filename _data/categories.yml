@@ -38,6 +38,12 @@
   icon: "🗂️"
   description: 프로젝트 진행 과정과 구현 기록
 
+- name: "딥 러닝 파이토치 교과서 - 입문부터 LLM 파인튜닝까지"
+  slug: deep-learning-pytorch-textbook
+  icon: "📘"
+  group: 개인공부
+  description: 딥 러닝 파이토치 교과서 학습 기록
+
 - name: 기타
   slug: other
   icon: "📚"
