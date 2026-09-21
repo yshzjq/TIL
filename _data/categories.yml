@@ -18,6 +18,11 @@
   icon: "🛠️"
   description: 딥러닝 실전 활용과 프롬프트 설계
 
+- name: "데이터 수집 & API 서버 구축"
+  slug: data-collection-api-server
+  icon: "🌐"
+  description: 데이터 수집과 API 서버 설계 및 구축
+
 - name: Math
   slug: math
   icon: "📐"
