@@ -36,34 +36,25 @@ description: 분야별로 정리한 모든 TIL 기록입니다.
           </button>
         {% endunless %}
       {% endfor %}
-
-      {% assign personal_study_items = site.data.categories | where: "group", "개인공부" %}
-      {% if personal_study_items.size > 0 %}
-        {% assign personal_study_count = 0 %}
-        {% for item in personal_study_items %}
-          {% assign item_posts = til_pages | where: "category", item.name %}
-          {% assign personal_study_count = personal_study_count | plus: item_posts.size %}
-        {% endfor %}
-        <details class="category-topic-group" open>
-          <summary class="category-topic-summary">
-            <span class="category-month-chevron" aria-hidden="true">›</span>
-            <span class="category-filter-icon" aria-hidden="true">📚</span>
-            <span class="category-filter-name">개인공부</span>
-            <span class="category-filter-count">{{ personal_study_count }}</span>
-          </summary>
-          <div class="category-topic-list">
-            {% for item in personal_study_items %}
-              {% assign category_posts = til_pages | where: "category", item.name %}
-              <button class="category-filter-button" type="button" data-category-filter="{{ item.slug }}" data-category-label="{{ item.name | escape }}" data-category-description="{{ item.description | escape }}" aria-controls="category-posts" aria-pressed="false">
-                <span class="category-filter-icon" aria-hidden="true">{{ item.icon }}</span>
-                <span class="category-filter-name">{{ item.name }}</span>
-                <span class="category-filter-count">{{ category_posts | size }}</span>
-              </button>
-            {% endfor %}
-          </div>
-        </details>
-      {% endif %}
     </div>
+
+    {% assign personal_study_items = site.data.categories | where: "group", "개인공부" %}
+    {% if personal_study_items.size > 0 %}
+      <div class="category-sidebar-heading category-section-heading">
+        <h2>개인공부</h2>
+      </div>
+
+      <div class="category-filter-list" aria-label="개인공부 구분 선택">
+        {% for item in personal_study_items %}
+          {% assign category_posts = til_pages | where: "category", item.name %}
+          <button class="category-filter-button" type="button" data-category-filter="{{ item.slug }}" data-category-label="{{ item.name | escape }}" data-category-description="{{ item.description | escape }}" aria-controls="category-posts" aria-pressed="false">
+            <span class="category-filter-icon" aria-hidden="true">{{ item.icon }}</span>
+            <span class="category-filter-name">{{ item.name }}</span>
+            <span class="category-filter-count">{{ category_posts | size }}</span>
+          </button>
+        {% endfor %}
+      </div>
+    {% endif %}
 
     {% if month_groups.size > 0 %}
       <div class="category-sidebar-heading category-date-heading">
