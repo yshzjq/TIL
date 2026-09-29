@@ -63,6 +63,12 @@ defaults:
       category: Python
       til: true
   - scope:
+      path: "langchain"
+    values:
+      layout: post
+      category: LangChain
+      til: true
+  - scope:
       path: "project"
     values:
       layout: post

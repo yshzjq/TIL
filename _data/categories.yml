@@ -33,6 +33,11 @@
   icon: "🐍"
   description: Python 문법과 활용
 
+- name: LangChain
+  slug: langchain
+  icon: "⛓️"
+  description: LangChain 개념과 활용
+
 - name: Project
   slug: project
   icon: "🗂️"
